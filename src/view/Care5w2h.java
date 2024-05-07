@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.SystemColor;
 
 public class Care5w2h extends JFrame {
 
@@ -36,6 +38,11 @@ public class Care5w2h extends JFrame {
 	private JLabel lblCustoTotal;
 	private JLabel lblStatusGeralgrfico;
 	private JTextField textField_10;
+	private JPanel panel;
+	private JLabel lblNewLabel_10;
+	private JLabel label;
+	private JTextField textField_11;
+	private JLabel lblDescri;
 
 	/**
 	 * Launch the application.
@@ -48,6 +55,7 @@ public class Care5w2h extends JFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
 				}
 			}
 		});
@@ -67,97 +75,97 @@ public class Care5w2h extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("O que (nome da ação):");
 		lblNewLabel.setToolTipText("Nome da Ação");
-		lblNewLabel.setBounds(12, 22, 177, 15);
+		lblNewLabel.setBounds(13, 12, 177, 15);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Quem:");
-		lblNewLabel_1.setBounds(12, 124, 52, 15);
+		lblNewLabel_1.setBounds(13, 160, 52, 15);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Início:");
-		lblNewLabel_2.setBounds(21, 421, 43, 15);
+		lblNewLabel_2.setBounds(21, 449, 43, 15);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Como:");
-		lblNewLabel_3.setBounds(13, 178, 52, 15);
+		lblNewLabel_3.setBounds(13, 205, 52, 15);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Onde:");
-		lblNewLabel_4.setBounds(110, 360, 43, 23);
+		lblNewLabel_4.setBounds(110, 388, 43, 23);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Justificativa:");
-		lblNewLabel_5.setBounds(12, 273, 100, 15);
+		lblNewLabel_5.setBounds(12, 300, 100, 15);
 		contentPane.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Urgência:");
-		lblNewLabel_6.setBounds(11, 75, 70, 15);
+		lblNewLabel_6.setBounds(13, 124, 70, 15);
 		contentPane.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Orçamento:");
-		lblNewLabel_7.setBounds(12, 364, 86, 15);
+		lblNewLabel_7.setBounds(12, 392, 86, 15);
 		contentPane.add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("Status:");
-		lblNewLabel_8.setBounds(12, 448, 52, 15);
+		lblNewLabel_8.setBounds(12, 476, 52, 15);
 		contentPane.add(lblNewLabel_8);
 		
 		textField = new JTextField();
-		textField.setBounds(11, 45, 283, 19);
+		textField.setBounds(11, 33, 283, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(12, 147, 282, 19);
+		textField_1.setBounds(12, 181, 282, 19);
 		contentPane.add(textField_1);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(67, 419, 86, 19);
+		textField_2.setBounds(67, 447, 86, 19);
 		contentPane.add(textField_2);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(12, 197, 283, 64);
+		textField_3.setBounds(12, 224, 283, 64);
 		contentPane.add(textField_3);
 		
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(107, 388, 187, 19);
+		textField_4.setBounds(107, 416, 187, 19);
 		contentPane.add(textField_4);
 		
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
-		textField_5.setBounds(12, 300, 282, 64);
+		textField_5.setBounds(12, 326, 282, 64);
 		contentPane.add(textField_5);
 		
 		textField_6 = new JTextField();
 		textField_6.setColumns(10);
-		textField_6.setBounds(11, 93, 137, 19);
+		textField_6.setBounds(11, 143, 137, 19);
 		contentPane.add(textField_6);
 		
 		textField_7 = new JTextField();
 		textField_7.setColumns(10);
-		textField_7.setBounds(12, 388, 86, 19);
+		textField_7.setBounds(12, 416, 86, 19);
 		contentPane.add(textField_7);
 		
 		textField_8 = new JTextField();
 		textField_8.setColumns(10);
-		textField_8.setBounds(67, 448, 86, 19);
+		textField_8.setBounds(67, 476, 86, 19);
 		contentPane.add(textField_8);
 		
 		textField_9 = new JTextField();
 		textField_9.setColumns(10);
-		textField_9.setBounds(214, 417, 80, 19);
+		textField_9.setBounds(214, 445, 80, 19);
 		contentPane.add(textField_9);
 		
 		lblNewLabel_9 = new JLabel("Fim:");
-		lblNewLabel_9.setBounds(181, 419, 34, 15);
+		lblNewLabel_9.setBounds(181, 447, 34, 15);
 		contentPane.add(lblNewLabel_9);
 		
 		JButton btnNewButton = new JButton("Cadastrar Ação");
-		btnNewButton.setBounds(12, 488, 147, 25);
+		btnNewButton.setBounds(12, 507, 147, 25);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Gerar Relatório");
@@ -202,12 +210,37 @@ public class Care5w2h extends JFrame {
 		contentPane.add(lblStatusGeralgrfico);
 		
 		JLabel lblNewLabel_9_1 = new JLabel("RI:");
-		lblNewLabel_9_1.setBounds(148, 124, 24, 15);
+		lblNewLabel_9_1.setBounds(151, 160, 24, 15);
 		contentPane.add(lblNewLabel_9_1);
 		
 		textField_10 = new JTextField();
 		textField_10.setColumns(10);
-		textField_10.setBounds(181, 122, 80, 19);
+		textField_10.setBounds(179, 156, 80, 19);
 		contentPane.add(textField_10);
+		
+		panel = new JPanel();
+		panel.setBackground(SystemColor.activeCaption);
+		panel.setBounds(12, 573, 699, 47);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		lblNewLabel_10 = new JLabel("");
+		lblNewLabel_10.setBounds(10, 16, 245, 15);
+		panel.add(lblNewLabel_10);
+		
+		label = new JLabel("");
+		label.setIcon(new ImageIcon(Care5w2h.class.getResource("/img/dboff.png")));
+		label.setBounds(626, 5, 32, 32);
+		panel.add(label);
+		
+		textField_11 = new JTextField();
+		textField_11.setColumns(10);
+		textField_11.setBounds(11, 72, 283, 52);
+		contentPane.add(textField_11);
+		
+		lblDescri = new JLabel("Descrição:");
+		lblDescri.setToolTipText("Nome da Ação");
+		lblDescri.setBounds(11, 55, 177, 15);
+		contentPane.add(lblDescri);
 	}
 }
