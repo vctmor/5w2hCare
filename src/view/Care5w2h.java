@@ -89,7 +89,7 @@ public class Care5w2h extends JFrame {
 			@Override
 			public void windowActivated(WindowEvent e) {
 
-				//status();
+				statusConnection();
 				//setarData();
 				
 				setLocationRelativeTo(null);
@@ -290,5 +290,27 @@ public class Care5w2h extends JFrame {
 		lblDescri.setBounds(11, 55, 80, 15);
 
 		contentPane.add(lblDescri);
+	} // fim construtor
+	
+	private void statusConnection() {
+		
+		try {
+			
+			con = dao.connect();
+
+			if (con == null) {
+			 
+				lblState.setIcon(new ImageIcon(Care5w2h.class.getResource("/img/dboff.png")));
+
+			} else {
+				 
+				lblState.setIcon(new ImageIcon(Care5w2h.class.getResource("/img/dbon.png")));
+			}
+			con.close();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 	}
 }
