@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.DAO;
+
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
@@ -12,8 +15,20 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Care5w2h extends JFrame {
+	
+	DAO dao = new DAO();
+	
+	private Connection con;
+	private PreparedStatement pst;
+	private ResultSet rs;
+	
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -65,6 +80,20 @@ public class Care5w2h extends JFrame {
 	 * Create the frame.
 	 */
 	public Care5w2h() {
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+
+				//status();
+				//setarData();
+				
+				setLocationRelativeTo(null);
+			}
+		});
+		
+		setTitle("5w2hCare");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 725, 649);
 		contentPane = new JPanel();
@@ -79,7 +108,7 @@ public class Care5w2h extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Quem:");
-		lblNewLabel_1.setBounds(13, 160, 52, 15);
+		lblNewLabel_1.setBounds(13, 163, 52, 15);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Início:");
@@ -87,7 +116,7 @@ public class Care5w2h extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Como:");
-		lblNewLabel_3.setBounds(13, 205, 52, 15);
+		lblNewLabel_3.setBounds(11, 205, 52, 15);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Onde:");
@@ -111,13 +140,13 @@ public class Care5w2h extends JFrame {
 		contentPane.add(lblNewLabel_8);
 		
 		textField = new JTextField();
-		textField.setBounds(11, 33, 283, 19);
+		textField.setBounds(12, 33, 282, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(12, 181, 282, 19);
+		textField_1.setBounds(13, 181, 281, 19);
 		contentPane.add(textField_1);
 		
 		textField_2 = new JTextField();
@@ -142,7 +171,7 @@ public class Care5w2h extends JFrame {
 		
 		textField_6 = new JTextField();
 		textField_6.setColumns(10);
-		textField_6.setBounds(11, 143, 137, 19);
+		textField_6.setBounds(13, 143, 135, 19);
 		contentPane.add(textField_6);
 		
 		textField_7 = new JTextField();
@@ -235,12 +264,12 @@ public class Care5w2h extends JFrame {
 		
 		textField_11 = new JTextField();
 		textField_11.setColumns(10);
-		textField_11.setBounds(11, 72, 283, 52);
+		textField_11.setBounds(13, 72, 281, 52);
 		contentPane.add(textField_11);
 		
 		lblDescri = new JLabel("Descrição:");
 		lblDescri.setToolTipText("Nome da Ação");
-		lblDescri.setBounds(11, 55, 177, 15);
+		lblDescri.setBounds(11, 55, 80, 15);
 		contentPane.add(lblDescri);
 	}
 }
