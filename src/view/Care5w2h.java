@@ -15,11 +15,13 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 
 public class Care5w2h extends JFrame {
 	
@@ -54,8 +56,10 @@ public class Care5w2h extends JFrame {
 	private JLabel lblStatusGeralgrfico;
 	private JTextField textField_10;
 	private JPanel panel;
-	private JLabel lblNewLabel_10;
-	private JLabel label;
+
+	private JLabel lblDate;
+	private JLabel lblState;
+
 	private JTextField textField_11;
 	private JLabel lblDescri;
 
@@ -108,7 +112,9 @@ public class Care5w2h extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Quem:");
+
 		lblNewLabel_1.setBounds(13, 163, 52, 15);
+
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Início:");
@@ -140,13 +146,17 @@ public class Care5w2h extends JFrame {
 		contentPane.add(lblNewLabel_8);
 		
 		textField = new JTextField();
+
 		textField.setBounds(12, 33, 282, 19);
+
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
+
 		textField_1.setBounds(13, 181, 281, 19);
+
 		contentPane.add(textField_1);
 		
 		textField_2 = new JTextField();
@@ -171,7 +181,9 @@ public class Care5w2h extends JFrame {
 		
 		textField_6 = new JTextField();
 		textField_6.setColumns(10);
+
 		textField_6.setBounds(13, 143, 135, 19);
+
 		contentPane.add(textField_6);
 		
 		textField_7 = new JTextField();
@@ -253,23 +265,30 @@ public class Care5w2h extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		lblNewLabel_10 = new JLabel("");
-		lblNewLabel_10.setBounds(10, 16, 245, 15);
-		panel.add(lblNewLabel_10);
-		
-		label = new JLabel("");
-		label.setIcon(new ImageIcon(Care5w2h.class.getResource("/img/dboff.png")));
-		label.setBounds(626, 5, 32, 32);
-		panel.add(label);
 		
 		textField_11 = new JTextField();
 		textField_11.setColumns(10);
 		textField_11.setBounds(13, 72, 281, 52);
+
+		lblDate = new JLabel("");
+		lblDate.setBounds(10, 16, 245, 15);
+		panel.add(lblDate);
+		
+		lblState = new JLabel("");
+		lblState.setIcon(new ImageIcon(Care5w2h.class.getResource("/img/dboff.png")));
+		lblState.setBounds(626, 5, 32, 32);
+		panel.add(lblState);
+		
+		textField_11 = new JTextField();
+		textField_11.setColumns(10);
+		textField_11.setBounds(11, 72, 283, 52);
 		contentPane.add(textField_11);
 		
 		lblDescri = new JLabel("Descrição:");
 		lblDescri.setToolTipText("Nome da Ação");
+
 		lblDescri.setBounds(11, 55, 80, 15);
+
 		contentPane.add(lblDescri);
 	}
 }
