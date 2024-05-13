@@ -21,6 +21,8 @@ import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.util.Date;
 
 
 public class Care5w2h extends JFrame {
@@ -90,7 +92,7 @@ public class Care5w2h extends JFrame {
 			public void windowActivated(WindowEvent e) {
 
 				statusConnection();
-				//setarData();
+				setDate();
 				
 				setLocationRelativeTo(null);
 			}
@@ -271,7 +273,8 @@ public class Care5w2h extends JFrame {
 		textField_11.setBounds(13, 72, 281, 52);
 
 		lblDate = new JLabel("");
-		lblDate.setBounds(10, 16, 245, 15);
+		lblDate.setForeground(SystemColor.text);
+		lblDate.setBounds(18, 14, 308, 17);
 		panel.add(lblDate);
 		
 		lblState = new JLabel("");
@@ -312,5 +315,18 @@ public class Care5w2h extends JFrame {
 			System.out.println(e);
 		}
 		
+	} // fim StatusConnectio
+	
+	private void setDate() {
+		
+		Date data = new Date();
+		DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
+		lblDate.setText(formatador.format(data));
+		
 	}
-}
+	
+	
+	
+	
+	
+} // ----------
