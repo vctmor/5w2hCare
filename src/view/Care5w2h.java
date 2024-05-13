@@ -10,6 +10,7 @@ import model.DAO;
 
 import java.awt.Component;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -23,6 +24,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.util.Date;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class Care5w2h extends JFrame {
@@ -36,33 +39,34 @@ public class Care5w2h extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField textNameAction;
+	private JTextField textWho;
+	private JTextField textStart;
+	private JTextField textHow;
+	private JTextField textWhereAction;
+	private JTextField textJustification;
+	private JTextField textUrgency;
 	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
+	private JTextField textStatus;
+	private JTextField textEnd;
 	private JLabel lblNewLabel_9;
-	private JButton btnAtualizar;
-	private JButton btnExcluirAo;
-	private JButton btnLimparCampos;
+	private JButton btnAtualize;
+	private JButton btnDelAction;
+	private JButton btnResetFields;
 	private JLabel lblNoIniciada;
 	private JLabel lblGernciaResposvel_2;
 	private JLabel lblGernciaResposvel_3;
 	private JLabel lblGernciaResposvel_1;
 	private JLabel lblCustoTotal;
 	private JLabel lblStatusGeralgrfico;
-	private JTextField textField_10;
+	private JTextField textRI;
 	private JPanel panel;
 
 	private JLabel lblDate;
 	private JLabel lblState;
 
 	private JTextField textField_11;
+	private JTextField textDescription;
 	private JLabel lblDescri;
 
 	/**
@@ -147,86 +151,92 @@ public class Care5w2h extends JFrame {
 		lblNewLabel_8.setBounds(12, 476, 52, 15);
 		contentPane.add(lblNewLabel_8);
 		
-		textField = new JTextField();
+		textNameAction = new JTextField();
 
-		textField.setBounds(12, 33, 282, 19);
+		textNameAction.setBounds(12, 33, 282, 19);
 
-		contentPane.add(textField);
-		textField.setColumns(10);
+		contentPane.add(textNameAction);
+		textNameAction.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		textWho = new JTextField();
+		textWho.setColumns(10);
 
-		textField_1.setBounds(13, 181, 281, 19);
+		textWho.setBounds(13, 181, 281, 19);
 
-		contentPane.add(textField_1);
+		contentPane.add(textWho);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(67, 447, 86, 19);
-		contentPane.add(textField_2);
+		textStart = new JTextField();
+		textStart.setColumns(10);
+		textStart.setBounds(67, 447, 86, 19);
+		contentPane.add(textStart);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(12, 224, 283, 64);
-		contentPane.add(textField_3);
+		textHow = new JTextField();
+		textHow.setColumns(10);
+		textHow.setBounds(12, 224, 283, 64);
+		contentPane.add(textHow);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(107, 416, 187, 19);
-		contentPane.add(textField_4);
+		textWhereAction = new JTextField();
+		textWhereAction.setColumns(10);
+		textWhereAction.setBounds(107, 416, 187, 19);
+		contentPane.add(textWhereAction);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(12, 326, 282, 64);
-		contentPane.add(textField_5);
+		textJustification = new JTextField();
+		textJustification.setColumns(10);
+		textJustification.setBounds(12, 326, 282, 64);
+		contentPane.add(textJustification);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
+		textUrgency = new JTextField();
+		textUrgency.setColumns(10);
 
-		textField_6.setBounds(13, 143, 135, 19);
+		textUrgency.setBounds(13, 143, 135, 19);
 
-		contentPane.add(textField_6);
+		contentPane.add(textUrgency);
 		
 		textField_7 = new JTextField();
 		textField_7.setColumns(10);
 		textField_7.setBounds(12, 416, 86, 19);
 		contentPane.add(textField_7);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(67, 476, 86, 19);
-		contentPane.add(textField_8);
+		textStatus = new JTextField();
+		textStatus.setColumns(10);
+		textStatus.setBounds(67, 476, 86, 19);
+		contentPane.add(textStatus);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(214, 445, 80, 19);
-		contentPane.add(textField_9);
+		textEnd = new JTextField();
+		textEnd.setColumns(10);
+		textEnd.setBounds(214, 445, 80, 19);
+		contentPane.add(textEnd);
 		
 		lblNewLabel_9 = new JLabel("Fim:");
 		lblNewLabel_9.setBounds(181, 447, 34, 15);
 		contentPane.add(lblNewLabel_9);
 		
-		JButton btnNewButton = new JButton("Cadastrar Ação");
-		btnNewButton.setBounds(12, 507, 147, 25);
-		contentPane.add(btnNewButton);
+		JButton btnAddAction = new JButton("Cadastrar Ação");
+		btnAddAction.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				addAction();
+			}
+		});
+		btnAddAction.setBounds(12, 507, 147, 25);
+		contentPane.add(btnAddAction);
 		
-		JButton btnNewButton_1 = new JButton("Gerar Relatório");
-		btnNewButton_1.setToolTipText("Gera PDF contendo as Ações cadastradas");
-		btnNewButton_1.setBounds(181, 544, 145, 25);
-		contentPane.add(btnNewButton_1);
+		JButton btnCreateReport = new JButton("Gerar Relatório");
+		btnCreateReport.setToolTipText("Gera PDF contendo as Ações cadastradas");
+		btnCreateReport.setBounds(181, 544, 145, 25);
+		contentPane.add(btnCreateReport);
 		
-		btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.setBounds(12, 544, 147, 25);
-		contentPane.add(btnAtualizar);
+		btnAtualize = new JButton("Atualizar");
+		btnAtualize.setBounds(12, 544, 147, 25);
+		contentPane.add(btnAtualize);
 		
-		btnExcluirAo = new JButton("Excluir Ação");
-		btnExcluirAo.setBounds(181, 505, 147, 25);
-		contentPane.add(btnExcluirAo);
+		btnDelAction = new JButton("Excluir Ação");
+		btnDelAction.setBounds(181, 505, 147, 25);
+		contentPane.add(btnDelAction);
 		
-		btnLimparCampos = new JButton("Limpar Campos");
-		btnLimparCampos.setBounds(181, 470, 147, 25);
-		contentPane.add(btnLimparCampos);
+		btnResetFields = new JButton("Limpar Campos");
+		btnResetFields.setBounds(181, 470, 147, 25);
+		contentPane.add(btnResetFields);
 		
 		lblNoIniciada = new JLabel("Não Iniciada:");
 		lblNoIniciada.setBounds(334, 195, 93, 15);
@@ -256,10 +266,10 @@ public class Care5w2h extends JFrame {
 		lblNewLabel_9_1.setBounds(151, 160, 24, 15);
 		contentPane.add(lblNewLabel_9_1);
 		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(179, 156, 80, 19);
-		contentPane.add(textField_10);
+		textRI = new JTextField();
+		textRI.setColumns(10);
+		textRI.setBounds(179, 156, 80, 19);
+		contentPane.add(textRI);
 		
 		panel = new JPanel();
 		panel.setBackground(SystemColor.activeCaption);
@@ -282,10 +292,10 @@ public class Care5w2h extends JFrame {
 		lblState.setBounds(626, 5, 32, 32);
 		panel.add(lblState);
 		
-		textField_11 = new JTextField();
-		textField_11.setColumns(10);
-		textField_11.setBounds(11, 72, 283, 52);
-		contentPane.add(textField_11);
+		textDescription = new JTextField();
+		textDescription.setColumns(10);
+		textDescription.setBounds(11, 72, 283, 52);
+		contentPane.add(textDescription);
 		
 		lblDescri = new JLabel("Descrição:");
 		lblDescri.setToolTipText("Nome da Ação");
@@ -325,6 +335,20 @@ public class Care5w2h extends JFrame {
 		
 	}
 	
+	private void addAction() {
+		
+		if (textNameAction.getText().isEmpty()) {
+
+			JOptionPane.showMessageDialog(null, "Preencha o nome da Ação");
+			textNameAction.requestFocus();
+			
+		} else {
+
+			//insertDB();
+
+		}
+		
+	}
 	
 	
 	
