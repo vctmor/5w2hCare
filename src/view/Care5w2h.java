@@ -23,6 +23,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -340,23 +342,23 @@ public class Care5w2h extends JFrame {
 		
 		
 		
-		String insert = "insert into action(description, nameAction, "
-				+ "urgency, who, how, justification, budget, start, end, status, description, whereAction) "
-				+ "values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		String insert = "insert into action(nameAction, urgency, who, how, justification, budget, start, end, status, description, whereAction) values(?,?,?,?,?,?,?,?,?,?,?)";
 		
-		try {
-			
+		try {	
 			
 			con = dao.connect();
 			pst = con.prepareStatement(insert);	
+			
 			String nameAction = textNameAction.getText();			
 			pst.setString(1, nameAction);
+			
+			//pst.setString(2, textDescription.getText());
+		    pst.setString(3, textWho.getText());
+		    pst.setString(4, textHow.getText()); 
+		    pst.setString(5, textJustification.getText()); 
 		    
-		    pst.setString(4, textWho.getText());
-		    pst.setString(5, textHow.getText()); 
-		    pst.setString(6, textJustification.getText()); 
-		    pst.setString(11, textDescription.getText()); 
-		    pst.setString(12, textWhereAction.getText()); 
+		    pst.setString(10, textDescription.getText()); 
+		    pst.setString(11, textWhereAction.getText()); 
 			
 			String stringUrgency = textUrgency.getText();
 			String stringStatus = textStatus.getText();
@@ -366,9 +368,9 @@ public class Care5w2h extends JFrame {
 				try {
 					
 					int urgency = Integer.parseInt(stringUrgency);
-				    pst.setInt(3, urgency);
+				    pst.setInt(2, urgency);
 				    int status = Integer.parseInt(stringStatus);
-				    pst.setInt(10, status);
+				    pst.setInt(9, status);
 				    
 				} catch (NumberFormatException e) {
 				    System.out.println("Erro ao converter texto para inteiro: " + e.getMessage());
@@ -385,7 +387,7 @@ public class Care5w2h extends JFrame {
 				try {
 					
 					double budget = Double.parseDouble(stringBudget);
-					 pst.setDouble(7, budget); 
+					 pst.setDouble(6, budget); 
 					
 				    
 				} catch (NumberFormatException e) {
@@ -405,13 +407,20 @@ public class Care5w2h extends JFrame {
 				if ( !stringStart.isEmpty() || !stringEnd.isEmpty() ) {
 				
 				try {
-					java.sql.Date start = java.sql.Date.valueOf(stringStart);
-				    pst.setDate(8, start); 
-				    java.sql.Date end = java.sql.Date.valueOf(stringEnd);
-				    pst.setDate(9, end); ;
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					java.util.Date parsedDate = dateFormat.parse(stringStart);
+					java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+					pst.setDate(7, sqlDate);
+					
+					java.util.Date parsedEnd = dateFormat.parse(stringEnd);
+					java.sql.Date sqlEnd = new java.sql.Date(parsedEnd.getTime());
+					pst.setDate(8, sqlEnd);
 				    
-				} catch (NumberFormatException e) {
-				    System.out.println("Erro ao converter texto para Date: " + e.getMessage());
+				} catch (ParseException e) {
+				    System.err.println("Erro ao converter texto para Date: Formato de data inválido");
+				    e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+				    System.err.println("Erro ao converter texto para Date: Data inválida");
 				    e.printStackTrace();
 				}
 			}else {
@@ -442,6 +451,7 @@ public class Care5w2h extends JFrame {
 		    
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.err.println(e);
 		}
 		
 	}
