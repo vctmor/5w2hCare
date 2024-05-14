@@ -46,7 +46,7 @@ public class Care5w2h extends JFrame {
 	private JTextField textWhereAction;
 	private JTextField textJustification;
 	private JTextField textUrgency;
-	private JTextField textField_7;
+	private JTextField textBudget;
 	private JTextField textStatus;
 	private JTextField textEnd;
 	private JLabel lblNewLabel_9;
@@ -192,10 +192,10 @@ public class Care5w2h extends JFrame {
 
 		contentPane.add(textUrgency);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(12, 416, 86, 19);
-		contentPane.add(textField_7);
+		textBudget = new JTextField();
+		textBudget.setColumns(10);
+		textBudget.setBounds(12, 416, 86, 19);
+		contentPane.add(textBudget);
 		
 		textStatus = new JTextField();
 		textStatus.setColumns(10);
@@ -216,6 +216,7 @@ public class Care5w2h extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				addAction();
+				
 			}
 		});
 		btnAddAction.setBounds(12, 507, 147, 25);
@@ -335,6 +336,116 @@ public class Care5w2h extends JFrame {
 		
 	}
 	
+	private void insertDB() {
+		
+		
+		
+		String insert = "insert into action(description, nameAction, "
+				+ "urgency, who, how, justification, budget, start, end, status, description, whereAction) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		try {
+			
+			
+			con = dao.connect();
+			pst = con.prepareStatement(insert);	
+			String nameAction = textNameAction.getText();			
+			pst.setString(1, nameAction);
+		    
+		    pst.setString(4, textWho.getText());
+		    pst.setString(5, textHow.getText()); 
+		    pst.setString(6, textJustification.getText()); 
+		    pst.setString(11, textDescription.getText()); 
+		    pst.setString(12, textWhereAction.getText()); 
+			
+			String stringUrgency = textUrgency.getText();
+			String stringStatus = textStatus.getText();
+			
+			if ( !stringStatus.isEmpty() || !stringUrgency.isEmpty() ) {
+				
+				try {
+					
+					int urgency = Integer.parseInt(stringUrgency);
+				    pst.setInt(3, urgency);
+				    int status = Integer.parseInt(stringStatus);
+				    pst.setInt(10, status);
+				    
+				} catch (NumberFormatException e) {
+				    System.out.println("Erro ao converter texto para inteiro: " + e.getMessage());
+				    e.printStackTrace();
+				}
+			}else {
+				System.err.println("Os campos stringStatus e/ou stringUrgency estão vazios.");
+			}
+			
+			 String stringBudget = textBudget.getText();
+			 
+			if ( !stringBudget.isEmpty() ) {
+				
+				try {
+					
+					double budget = Double.parseDouble(stringBudget);
+					 pst.setDouble(7, budget); 
+					
+				    
+				} catch (NumberFormatException e) {
+				    System.out.println("Erro ao converter texto para Double: " + e.getMessage());
+				    e.printStackTrace();
+				}
+			}else {
+				System.err.println("O campo stringBudget está vazio.");
+			}
+			
+
+		    String stringStart = textStart.getText();
+		    
+		    String stringEnd = textEnd.getText();
+		   
+			
+				if ( !stringStart.isEmpty() || !stringEnd.isEmpty() ) {
+				
+				try {
+					java.sql.Date start = java.sql.Date.valueOf(stringStart);
+				    pst.setDate(8, start); 
+				    java.sql.Date end = java.sql.Date.valueOf(stringEnd);
+				    pst.setDate(9, end); ;
+				    
+				} catch (NumberFormatException e) {
+				    System.out.println("Erro ao converter texto para Date: " + e.getMessage());
+				    e.printStackTrace();
+				}
+			}else {
+				System.err.println("Um dos campos Início ou Fim estã vazio.");
+			}
+		   			
+			if (!nameAction.isEmpty()) {
+				
+				int confirm = pst.executeUpdate();
+				System.out.println(confirm);
+				if (confirm == 1) {
+
+					JOptionPane.showMessageDialog(null, "Ação cadastrada com sucesso!");
+					System.out.println("Ação cadastrada com sucesso!");
+					//TODO: Fazer método reset();
+					//reset();
+
+				} else {
+
+					JOptionPane.showMessageDialog(null, "Erro! Ação não cadastrada");
+					System.out.println("Erro! Ação não cadastrada");
+				}
+				
+			} else {
+				JOptionPane.showMessageDialog(null, "Por favor, não esqueça o nome da Ação");
+				System.out.println("Por favor, não esqueça o nome da Ação");
+			}
+		    
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	
 	private void addAction() {
 		
 		if (textNameAction.getText().isEmpty()) {
@@ -344,7 +455,7 @@ public class Care5w2h extends JFrame {
 			
 		} else {
 
-			//insertDB();
+			insertDB();
 
 		}
 		
