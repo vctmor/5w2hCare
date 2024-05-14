@@ -407,7 +407,7 @@ public class Care5w2h extends JFrame {
 				if ( !stringStart.isEmpty() || !stringEnd.isEmpty() ) {
 				
 				try {
-					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 					java.util.Date parsedDate = dateFormat.parse(stringStart);
 					java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
 					pst.setDate(7, sqlDate);
