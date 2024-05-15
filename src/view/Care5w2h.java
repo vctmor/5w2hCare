@@ -268,6 +268,12 @@ public class Care5w2h extends JFrame {
 		contentPane.add(btnDelAction);
 		
 		btnResetFields = new JButton("Limpar Campos");
+		btnResetFields.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				reset();
+			}
+		});
 		btnResetFields.setBounds(181, 470, 147, 25);
 		contentPane.add(btnResetFields);
 		
@@ -496,10 +502,38 @@ public class Care5w2h extends JFrame {
 	
 	private void listNames() {
 		DefaultListModel<String> model = new DefaultListModel<>();
-		listNames.setModel(model);
+		listNames.setModel(model);//
 		
 		String readList = "select * from action where nameAction like '"
-				+ textNameAction.getText() + "%'" + "order by nome";
+				+ textNameAction.getText() + "%'" + "order by nameAction";
+		
+		try {
+			con = dao.connect();
+			pst = con.prepareStatement(readList);
+			rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				
+				scrollPaneList.setVisible(true);
+				model.addElement(rs.getString(2));
+				// se o campo estiver vazio, esconde a lita
+				if (textNameAction.getText().isEmpty()) {
+						scrollPaneList.setVisible(false);
+				}
+			}
+			con.close();
+		} catch (Exception e) {
+			
+			System.out.println(e);
+		}
+	}
+	
+	private void reset() {
+		
+		scrollPaneList.setVisible(false);
+		textRI.setText(null);
+		textNameAction.setText(null);
+		textNameAction.requestFocus();
 	}
 	
 	
