@@ -30,6 +30,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.border.BevelBorder;
 
 
 public class Care5w2h extends JFrame {
@@ -113,10 +116,26 @@ public class Care5w2h extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 725, 649);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		scrollPaneList = new JScrollPane();
+		scrollPaneList.setBorder(null);
+		scrollPaneList.setVisible(false);
+		scrollPaneList.setBounds(13, 49, 282, 90);
+		contentPane.add(scrollPaneList);
+		
+		listNames = new JList();
+		listNames.setBorder(null);
+		scrollPaneList.setViewportView(listNames);
+		
+		lblDescri = new JLabel("Descrição:");
+		lblDescri.setToolTipText("Nome da Ação");
+		
+				lblDescri.setBounds(11, 55, 80, 15);
+				
+						contentPane.add(lblDescri);
 		
 		JLabel lblNewLabel = new JLabel("O que (nome da ação):");
 		lblNewLabel.setToolTipText("Nome da Ação");
@@ -158,6 +177,12 @@ public class Care5w2h extends JFrame {
 		contentPane.add(lblNewLabel_8);
 		
 		textNameAction = new JTextField();
+		textNameAction.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		textNameAction.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				listNames();			}
+		});
 
 		textNameAction.setBounds(12, 33, 282, 19);
 
@@ -303,21 +328,6 @@ public class Care5w2h extends JFrame {
 		textDescription.setColumns(10);
 		textDescription.setBounds(11, 72, 283, 52);
 		contentPane.add(textDescription);
-		
-		lblDescri = new JLabel("Descrição:");
-		lblDescri.setToolTipText("Nome da Ação");
-
-		lblDescri.setBounds(11, 55, 80, 15);
-
-		contentPane.add(lblDescri);
-		
-		scrollPaneList = new JScrollPane();
-		scrollPaneList.setVisible(false);
-		scrollPaneList.setBounds(13, 49, 282, 90);
-		contentPane.add(scrollPaneList);
-		
-		listNames = new JList();
-		scrollPaneList.setViewportView(listNames);
 	} // fim construtor
 	
 	private void statusConnection() {
@@ -483,7 +493,10 @@ public class Care5w2h extends JFrame {
 		
 	}
 	
-	
+	private void listNames() {
+		
+		scrollPaneList.setVisible(true);
+	}
 	
 	
 } // ----------
