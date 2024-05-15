@@ -717,6 +717,39 @@ public class Care5w2h extends JFrame {
 		
 	}
 	
+	private void exclude() {
+		
+		int confirmExclude = JOptionPane.showConfirmDialog(null, "Confirma a exclusão desta Ação?", "Atenção!",
+				JOptionPane.YES_NO_OPTION);
+		
+		if (confirmExclude == JOptionPane.YES_OPTION) {
+			
+			String exclude = "delete from action where ri=?";
+			
+			try {
+				
+				con = dao.connect();
+				pst = con.prepareStatement(exclude);
+				pst.setString(1, textRI.getText());
+				
+				int confirm = pst.executeUpdate();
+				
+				if (confirm == 1) {
+
+					reset();
+					JOptionPane.showMessageDialog(null, "Ação removida com sucesso");
+				}
+
+				con.close();
+				
+			} catch (Exception e) {
+				
+				System.out.println(e);
+			}
+			
+		}
+	
+	}
 	
 	
 	private void reset() {
