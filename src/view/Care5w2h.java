@@ -34,6 +34,8 @@ import javax.swing.JList;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.border.BevelBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class Care5w2h extends JFrame {
@@ -128,6 +130,13 @@ public class Care5w2h extends JFrame {
 		contentPane.add(scrollPaneList);
 		
 		listNames = new JList();
+		listNames.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				searchName();
+			}
+		});
 		listNames.setBorder(null);
 		scrollPaneList.setViewportView(listNames);
 		
@@ -516,7 +525,7 @@ public class Care5w2h extends JFrame {
 				
 				scrollPaneList.setVisible(true);
 				model.addElement(rs.getString(2));
-				// se o campo estiver vazio, esconde a lita
+				// se o campo estiver vazio, esconde a lista
 				if (textNameAction.getText().isEmpty()) {
 						scrollPaneList.setVisible(false);
 				}
@@ -526,6 +535,41 @@ public class Care5w2h extends JFrame {
 			
 			System.out.println(e);
 		}
+	}
+	
+	private void searchName() {
+		
+		int index = listNames.getSelectedIndex();
+		
+		if (index >=0) {
+			
+			String readNameAction = "select * from action where nameAction like '" + textNameAction.getText() + "%'"
+					+ "order by nameAction limit " + (index) + ", 1";
+			try {
+				
+				con = dao.connect();
+				pst = con.prepareStatement(readNameAction);
+				rs = pst.executeQuery();
+				
+				while (rs.next()) {
+					
+					scrollPaneList.setVisible(false);
+					textRI.setText(rs.getString(1));
+					textNameAction.setText(rs.getString(2));
+				}
+				con.close();
+				
+			} catch (Exception e) {
+				
+				System.out.println(e);
+			}
+			
+		} else {
+			
+			scrollPaneList.setVisible(false);
+
+		}
+		
 	}
 	
 	private void reset() {
