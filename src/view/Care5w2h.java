@@ -60,7 +60,7 @@ public class Care5w2h extends JFrame {
 	private JTextField textStatus;
 	private JTextField textEnd;
 	private JLabel lblNewLabel_9;
-	private JButton btnAtualize;
+	private JButton btnUpdate;
 	private JButton btnDelAction;
 	private JButton btnResetFields;
 	private JLabel lblNoIniciada;
@@ -268,9 +268,15 @@ public class Care5w2h extends JFrame {
 		btnCreateReport.setBounds(181, 544, 145, 25);
 		contentPane.add(btnCreateReport);
 		
-		btnAtualize = new JButton("Atualizar");
-		btnAtualize.setBounds(12, 544, 147, 25);
-		contentPane.add(btnAtualize);
+		btnUpdate = new JButton("Atualizar");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				update();
+			}
+		});
+		btnUpdate.setBounds(12, 544, 147, 25);
+		contentPane.add(btnUpdate);
 		
 		btnDelAction = new JButton("Excluir Ação");
 		btnDelAction.setBounds(181, 505, 147, 25);
@@ -486,7 +492,8 @@ public class Care5w2h extends JFrame {
 				JOptionPane.showMessageDialog(null, "Por favor, não esqueça o nome da Ação");
 				System.out.println("Por favor, não esqueça o nome da Ação");
 			}
-		    
+			con.close();
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.err.println(e);
@@ -556,6 +563,9 @@ public class Care5w2h extends JFrame {
 					scrollPaneList.setVisible(false);
 					textRI.setText(rs.getString(1));
 					textNameAction.setText(rs.getString(2));
+					
+					//TODO: Recuperar os dados dos demais campos
+					
 				}
 				con.close();
 				
@@ -569,6 +579,135 @@ public class Care5w2h extends JFrame {
 			scrollPaneList.setVisible(false);
 
 		}
+		
+	}
+	
+	private void update() {
+		
+		if (textNameAction.getText().isEmpty()) {
+
+			JOptionPane.showMessageDialog(null, "Preencha o nome da Ação");
+			textNameAction.requestFocus();
+			
+		} else {
+
+			String update = "update action set nameAction=?, urgency=?, who=?, how=?, justification=?, budget=?, start=?, end=?, status=?, description=?, whereAction=? where ri=?";
+			
+			try {	
+				
+				con = dao.connect();
+				pst = con.prepareStatement(update);	
+				
+				String nameAction = textNameAction.getText();			
+				pst.setString(1, nameAction);
+				
+				//pst.setString(2, textDescription.getText());
+			    pst.setString(3, textWho.getText());
+			    pst.setString(4, textHow.getText()); 
+			    pst.setString(5, textJustification.getText()); 
+			    
+			    pst.setString(10, textDescription.getText()); 
+			    pst.setString(11, textWhereAction.getText()); 
+			    pst.setString(12, textRI.getText());
+				
+				String stringUrgency = textUrgency.getText();
+				String stringStatus = textStatus.getText();
+				
+				if ( !stringStatus.isEmpty() || !stringUrgency.isEmpty() ) {
+					
+					try {
+						
+						int urgency = Integer.parseInt(stringUrgency);
+					    pst.setInt(2, urgency);
+					    int status = Integer.parseInt(stringStatus);
+					    pst.setInt(9, status);
+					    
+					} catch (NumberFormatException e) {
+					    System.out.println("Erro ao converter texto para inteiro: " + e.getMessage());
+					    e.printStackTrace();
+					}
+				}else {
+					System.err.println("Os campos stringStatus e/ou stringUrgency estão vazios.");
+				}
+				
+				 String stringBudget = textBudget.getText();
+				 
+				if ( !stringBudget.isEmpty() ) {
+					
+					try {
+						
+						double budget = Double.parseDouble(stringBudget);
+						 pst.setDouble(6, budget); 
+						
+					    
+					} catch (NumberFormatException e) {
+					    System.out.println("Erro ao converter texto para Double: " + e.getMessage());
+					    e.printStackTrace();
+					}
+				}else {
+					System.err.println("O campo stringBudget está vazio.");
+				}
+				
+
+			    String stringStart = textStart.getText();
+			    
+			    String stringEnd = textEnd.getText();
+			   
+				
+					if ( !stringStart.isEmpty() || !stringEnd.isEmpty() ) {
+					
+					try {
+						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+						java.util.Date parsedDate = dateFormat.parse(stringStart);
+						java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+						pst.setDate(7, sqlDate);
+						
+						java.util.Date parsedEnd = dateFormat.parse(stringEnd);
+						java.sql.Date sqlEnd = new java.sql.Date(parsedEnd.getTime());
+						pst.setDate(8, sqlEnd);
+					    
+					} catch (ParseException e) {
+					    System.err.println("Erro ao converter texto para Date: Formato de data inválido");
+					    e.printStackTrace();
+					} catch (IllegalArgumentException e) {
+					    System.err.println("Erro ao converter texto para Date: Data inválida");
+					    e.printStackTrace();
+					}
+				}else {
+					System.err.println("Um dos campos Início ou Fim estã vazio.");
+				}
+			   			
+				if (!nameAction.isEmpty()) {
+					
+					int confirm = pst.executeUpdate();
+					System.out.println(confirm);
+					if (confirm == 1) {
+
+						JOptionPane.showMessageDialog(null, "Ação cadastrada com sucesso!");
+						System.out.println("Ação cadastrada com sucesso!");
+						//TODO: Fazer método reset();
+						//reset();
+
+					} else {
+
+						JOptionPane.showMessageDialog(null, "Erro! Ação não cadastrada");
+						System.out.println("Erro! Ação não cadastrada");
+					}
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "Por favor, não esqueça o nome da Ação");
+					System.out.println("Por favor, não esqueça o nome da Ação");
+				}
+				con.close();
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.err.println(e);
+			}
+			
+
+		}
+		
 		
 	}
 	
