@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 
@@ -494,8 +495,11 @@ public class Care5w2h extends JFrame {
 	}
 	
 	private void listNames() {
+		DefaultListModel<String> model = new DefaultListModel<>();
+		listNames.setModel(model);
 		
-		scrollPaneList.setVisible(true);
+		String readList = "select * from action where nameAction like '"
+				+ textNameAction.getText() + "%'" + "order by nome";
 	}
 	
 	
