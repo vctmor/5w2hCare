@@ -279,6 +279,12 @@ public class Care5w2h extends JFrame {
 		contentPane.add(btnUpdate);
 		
 		btnDelAction = new JButton("Excluir Ação");
+		btnDelAction.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				exclude();
+			}
+		});
 		btnDelAction.setBounds(181, 505, 147, 25);
 		contentPane.add(btnDelAction);
 		
@@ -683,15 +689,15 @@ public class Care5w2h extends JFrame {
 					System.out.println(confirm);
 					if (confirm == 1) {
 
-						JOptionPane.showMessageDialog(null, "Ação cadastrada com sucesso!");
-						System.out.println("Ação cadastrada com sucesso!");
+						JOptionPane.showMessageDialog(null, "Ação atualizada com sucesso!");
+						
 						//TODO: Fazer método reset();
 						//reset();
 
 					} else {
 
-						JOptionPane.showMessageDialog(null, "Erro! Ação não cadastrada");
-						System.out.println("Erro! Ação não cadastrada");
+						JOptionPane.showMessageDialog(null, "Erro! Ação não atualizada");
+						System.out.println("Erro! Ação não atualizada");
 					}
 					
 				} else {
@@ -710,6 +716,8 @@ public class Care5w2h extends JFrame {
 		
 		
 	}
+	
+	
 	
 	private void reset() {
 		
