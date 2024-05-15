@@ -28,6 +28,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JList;
 
 
 public class Care5w2h extends JFrame {
@@ -70,6 +72,8 @@ public class Care5w2h extends JFrame {
 	private JTextField textField_11;
 	private JTextField textDescription;
 	private JLabel lblDescri;
+	private JScrollPane scrollPaneList;
+	private JList listNames;
 
 	/**
 	 * Launch the application.
@@ -306,6 +310,14 @@ public class Care5w2h extends JFrame {
 		lblDescri.setBounds(11, 55, 80, 15);
 
 		contentPane.add(lblDescri);
+		
+		scrollPaneList = new JScrollPane();
+		scrollPaneList.setVisible(false);
+		scrollPaneList.setBounds(13, 49, 282, 90);
+		contentPane.add(scrollPaneList);
+		
+		listNames = new JList();
+		scrollPaneList.setViewportView(listNames);
 	} // fim construtor
 	
 	private void statusConnection() {
