@@ -80,6 +80,9 @@ public class Care5w2h extends JFrame {
 	private JLabel lblDescri;
 	private JScrollPane scrollPaneList;
 	private JList listNames;
+	private JButton btnCreateReport;
+	private JButton btnSearchRI;
+	private JButton btnAddAction;
 
 	/**
 	 * Launch the application.
@@ -261,7 +264,7 @@ public class Care5w2h extends JFrame {
 		lblNewLabel_9.setBounds(181, 447, 34, 15);
 		contentPane.add(lblNewLabel_9);
 		
-		JButton btnAddAction = new JButton("Cadastrar Ação");
+		btnAddAction = new JButton("Cadastrar Ação");
 		btnAddAction.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -272,7 +275,14 @@ public class Care5w2h extends JFrame {
 		btnAddAction.setBounds(12, 507, 147, 25);
 		contentPane.add(btnAddAction);
 		
-		JButton btnCreateReport = new JButton("Gerar Relatório");
+		btnCreateReport = new JButton("Gerar Relatório");
+		btnCreateReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				//createReport();
+				
+			}
+		});
 		btnCreateReport.setToolTipText("Gera PDF contendo as Ações cadastradas");
 		btnCreateReport.setBounds(181, 544, 145, 25);
 		contentPane.add(btnCreateReport);
@@ -366,7 +376,7 @@ public class Care5w2h extends JFrame {
 		textDescription.setBounds(11, 72, 283, 52);
 		contentPane.add(textDescription);
 		
-		JButton btnSearchRI = new JButton("Buscar RI");
+		btnSearchRI = new JButton("Buscar RI");
 		btnSearchRI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -569,11 +579,28 @@ public class Care5w2h extends JFrame {
 					btnCreateReport.setEnabled(false);
 					
 				} else {
-
-				}
+					
+					int confirm = JOptionPane.showConfirmDialog(null, "Ação não cadastrada.\nDeseja iniciar um novo cadastro?", "Aviso", JOptionPane.YES_OPTION);
+					
+					if (confirm == JOptionPane.YES_OPTION) {
+						
+						textRI.setEditable(false);
+						textRI.setText(null);
+						btnSearchRI.setEnabled(false);
+						textNameAction.setText(null);
+						textNameAction.requestFocus();						
+						btnAddAction.setEnabled(true);
+						
+				} else {
+						
+					reset();
+				}					
+					
+			}
 				
 			} catch (Exception e) {
-				// TODO: handle exception
+				
+				System.out.println(e);
 			}
 
 		}
@@ -815,5 +842,14 @@ public class Care5w2h extends JFrame {
 		textRI.setText(null);
 		textNameAction.setText(null);
 		textNameAction.requestFocus();
+		
+		textRI.setEnabled(true);
+		textRI.setEditable(true);
+		btnSearchRI.setEnabled(true);
+		
+		btnAddAction.setEnabled(false);
+		btnUpdate.setEnabled(false);
+		btnExcludeAction.setEnabled(false);
+		btnCreateReport.setEnabled(true);
 	}
 } // ----------
