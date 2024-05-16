@@ -61,7 +61,7 @@ public class Care5w2h extends JFrame {
 	private JTextField textEnd;
 	private JLabel lblNewLabel_9;
 	private JButton btnUpdate;
-	private JButton btnDelAction;
+	private JButton btnExcludeAction;
 	private JButton btnResetFields;
 	private JLabel lblNoIniciada;
 	private JLabel lblGernciaResposvel_2;
@@ -287,15 +287,15 @@ public class Care5w2h extends JFrame {
 		btnUpdate.setBounds(12, 544, 147, 25);
 		contentPane.add(btnUpdate);
 		
-		btnDelAction = new JButton("Excluir Ação");
-		btnDelAction.addActionListener(new ActionListener() {
+		btnExcludeAction = new JButton("Excluir Ação");
+		btnExcludeAction.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				exclude();
 			}
 		});
-		btnDelAction.setBounds(181, 505, 147, 25);
-		contentPane.add(btnDelAction);
+		btnExcludeAction.setBounds(181, 505, 147, 25);
+		contentPane.add(btnExcludeAction);
 		
 		btnResetFields = new JButton("Limpar Campos");
 		btnResetFields.addActionListener(new ActionListener() {
@@ -365,6 +365,16 @@ public class Care5w2h extends JFrame {
 		textDescription.setColumns(10);
 		textDescription.setBounds(11, 72, 283, 52);
 		contentPane.add(textDescription);
+		
+		JButton btnSearchRI = new JButton("Buscar RI");
+		btnSearchRI.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				searchRI();
+			}
+		});
+		btnSearchRI.setBounds(294, 151, 117, 25);
+		contentPane.add(btnSearchRI);
 	} // fim construtor
 	
 	private void statusConnection() {
@@ -529,6 +539,44 @@ public class Care5w2h extends JFrame {
 
 		}
 		
+	}
+	
+	private void searchRI() {
+		
+		if (textRI.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Digite o RI");
+			textRI.requestFocus();
+			
+		} else {
+			
+			String readRI = "select * from action where ri = ?";
+			
+			try {
+				
+				con = dao.connect();
+				pst = con.prepareStatement(readRI);
+				pst.setString(1, textRI.getText());
+				rs = pst.executeQuery();
+				
+				if (rs.next()) {
+					
+					textNameAction.setText(rs.getString(2));					
+					
+					textRI.setEditable(false);
+					btnSearchRI.setEnabled(false);
+					btnUpdate.setEnabled(true);
+					btnExcludeAction.setEnabled(true);  	
+					btnCreateReport.setEnabled(false);
+					
+				} else {
+
+				}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+		}
 	}
 	
 	private void listNames() {
@@ -768,6 +816,4 @@ public class Care5w2h extends JFrame {
 		textNameAction.setText(null);
 		textNameAction.requestFocus();
 	}
-	
-	
 } // ----------
