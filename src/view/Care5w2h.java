@@ -192,6 +192,15 @@ public class Care5w2h extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				listNames();			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					
+					scrollPaneList.setVisible(false);
+				}
+				
+			}
 		});
 
 		textNameAction.setBounds(12, 33, 282, 19);
