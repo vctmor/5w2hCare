@@ -36,6 +36,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.border.BevelBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.UIManager;
 
 
 public class Care5w2h extends JFrame {
@@ -191,6 +192,7 @@ public class Care5w2h extends JFrame {
 		contentPane.add(lblNewLabel_8);
 		
 		textNameAction = new JTextField();
+		textNameAction.setForeground(UIManager.getColor("Button.background"));
 		textNameAction.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		textNameAction.addKeyListener(new KeyAdapter() {
 			@Override
@@ -319,27 +321,27 @@ public class Care5w2h extends JFrame {
 		contentPane.add(btnResetFields);
 		
 		lblNoIniciada = new JLabel("Não Iniciada:");
-		lblNoIniciada.setBounds(334, 195, 93, 15);
+		lblNoIniciada.setBounds(313, 97, 93, 15);
 		contentPane.add(lblNoIniciada);
 		
 		lblGernciaResposvel_2 = new JLabel("Atrasada:");
-		lblGernciaResposvel_2.setBounds(357, 222, 70, 15);
+		lblGernciaResposvel_2.setBounds(313, 124, 70, 15);
 		contentPane.add(lblGernciaResposvel_2);
 		
 		lblGernciaResposvel_3 = new JLabel("Em andamento:");
-		lblGernciaResposvel_3.setBounds(334, 313, 126, 15);
+		lblGernciaResposvel_3.setBounds(313, 55, 114, 15);
 		contentPane.add(lblGernciaResposvel_3);
 		
-		lblGernciaResposvel_1 = new JLabel("Concluída:");
-		lblGernciaResposvel_1.setBounds(371, 339, 80, 15);
+		lblGernciaResposvel_1 = new JLabel("Concluídas:");
+		lblGernciaResposvel_1.setBounds(313, 145, 93, 15);
 		contentPane.add(lblGernciaResposvel_1);
 		
 		lblCustoTotal = new JLabel("Custo Total");
-		lblCustoTotal.setBounds(498, 195, 93, 15);
+		lblCustoTotal.setBounds(313, 183, 93, 15);
 		contentPane.add(lblCustoTotal);
 		
 		lblStatusGeralgrfico = new JLabel("Status Geral (gráfico piza)");
-		lblStatusGeralgrfico.setBounds(513, 300, 177, 15);
+		lblStatusGeralgrfico.setBounds(313, 248, 177, 15);
 		contentPane.add(lblStatusGeralgrfico);
 		
 		JLabel lblNewLabel_9_1 = new JLabel("RI:");
@@ -377,15 +379,57 @@ public class Care5w2h extends JFrame {
 		textDescription.setBounds(11, 72, 283, 52);
 		contentPane.add(textDescription);
 		
-		btnSearchRI = new JButton("Buscar RI");
+		btnSearchRI = new JButton("");
+		btnSearchRI.setToolTipText("Buscar Ação pelo RI");
+		btnSearchRI.setIcon(new ImageIcon(Care5w2h.class.getResource("/img/search.png")));
 		btnSearchRI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				searchRI();
 			}
 		});
-		btnSearchRI.setBounds(294, 151, 117, 25);
+		btnSearchRI.setBounds(261, 151, 34, 25);
 		contentPane.add(btnSearchRI);
+		
+		JLabel lblToalAcoes = new JLabel("Toal de Ações:");
+		lblToalAcoes.setBounds(313, 35, 103, 15);
+		contentPane.add(lblToalAcoes);
+		
+		JLabel showTotalActions = new JLabel("");
+		showTotalActions.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		showTotalActions.setBackground(UIManager.getColor("Label.disabledForeground"));
+		showTotalActions.setBounds(428, 35, 34, 15);
+		contentPane.add(showTotalActions);
+		
+		JLabel showInProgress = new JLabel("");
+		showInProgress.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		showInProgress.setBackground(UIManager.getColor("Button.disabledText"));
+		showInProgress.setBounds(428, 55, 34, 15);
+		contentPane.add(showInProgress);
+		
+		JLabel showNotStarted = new JLabel("");
+		showNotStarted.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		showNotStarted.setBackground(UIManager.getColor("Button.disabledText"));
+		showNotStarted.setBounds(428, 97, 34, 15);
+		contentPane.add(showNotStarted);
+		
+		JLabel showStarted = new JLabel("");
+		showStarted.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		showStarted.setBackground(UIManager.getColor("Button.disabledText"));
+		showStarted.setBounds(428, 124, 34, 15);
+		contentPane.add(showStarted);
+		
+		JLabel showTotalBudget = new JLabel("");
+		showTotalBudget.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		showTotalBudget.setBackground(UIManager.getColor("Button.disabledText"));
+		showTotalBudget.setBounds(428, 181, 34, 15);
+		contentPane.add(showTotalBudget);
+		
+		JLabel showCompleted = new JLabel("");
+		showCompleted.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		showCompleted.setBackground(UIManager.getColor("Button.disabledText"));
+		showCompleted.setBounds(428, 145, 34, 15);
+		contentPane.add(showCompleted);
 	} // fim construtor
 	
 	private void statusConnection() {
