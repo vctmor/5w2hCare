@@ -112,6 +112,7 @@ public class Care5w2h extends JFrame {
 
 				statusConnection();
 				setDate();
+				reset();
 				
 				setLocationRelativeTo(null);
 			}
@@ -588,6 +589,7 @@ public class Care5w2h extends JFrame {
 					btnUpdate.setEnabled(true);
 					btnExcludeAction.setEnabled(true);  	
 					btnCreateReport.setEnabled(false);
+					btnAddAction.setEnabled(false);
 					
 				} else {
 					
@@ -601,8 +603,12 @@ public class Care5w2h extends JFrame {
 						textNameAction.setText(null);
 						textNameAction.requestFocus();						
 						btnAddAction.setEnabled(true);
+						btnUpdate.setEnabled(false);
+						btnExcludeAction.setEnabled(false);  	
+						btnCreateReport.setEnabled(false);
 						
 				} else {
+					btnAddAction.setEnabled(true);
 						
 					reset();
 				}					
@@ -865,11 +871,23 @@ public class Care5w2h extends JFrame {
 		textNameAction.setText(null);
 		textNameAction.requestFocus();
 		
+		textUrgency.setText(null);
+		textWho.setText(null);
+		textHow.setText(null);
+		textJustification.setText(null);
+		textBudget.setText(null);
+		textStart.setText(null);
+		textEnd.setText(null);
+		textStatus.setText(null);
+		textDescription.setText(null);
+		textWhereAction.setText(null);
+		
+		
 		textRI.setEnabled(true);
 		textRI.setEditable(true);
-		btnSearchRI.setEnabled(true);
 		
-		btnAddAction.setEnabled(false);
+		btnSearchRI.setEnabled(true);		
+		btnAddAction.setEnabled(true);
 		btnUpdate.setEnabled(false);
 		btnExcludeAction.setEnabled(false);
 		btnCreateReport.setEnabled(true);
