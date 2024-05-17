@@ -653,6 +653,17 @@ public class Care5w2h extends JFrame {
 					scrollPaneList.setVisible(false);
 					textRI.setText(rs.getString(1));
 					textNameAction.setText(rs.getString(2));
+					textUrgency.setText(rs.getString(3));
+					textWho.setText(rs.getString(4));
+					textHow.setText(rs.getString(5));
+					textJustification.setText(rs.getString(6));
+					textBudget.setText(rs.getString(7));
+					textStart.setText(rs.getString(8));
+					textEnd.setText(rs.getString(9));
+					textStatus.setText(rs.getString(10));
+					textDescription.setText(rs.getString(11));
+					textWhereAction.setText(rs.getString(12));
+					
 					
 					//TODO: Recuperar os dados dos demais campos
 					
@@ -837,7 +848,7 @@ public class Care5w2h extends JFrame {
 	
 	
 	private void reset() {
-		
+		//TODO: adicionar os demais campos
 		scrollPaneList.setVisible(false);
 		textRI.setText(null);
 		textNameAction.setText(null);
