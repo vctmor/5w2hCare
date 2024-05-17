@@ -570,7 +570,18 @@ public class Care5w2h extends JFrame {
 				
 				if (rs.next()) {
 					
-					textNameAction.setText(rs.getString(2));					
+					textRI.setText(rs.getString(1));
+					textNameAction.setText(rs.getString(2));
+					textUrgency.setText(rs.getString(3));
+					textWho.setText(rs.getString(4));
+					textHow.setText(rs.getString(5));
+					textJustification.setText(rs.getString(6));
+					textBudget.setText(rs.getString(7));
+					textStart.setText(rs.getString(8));
+					textEnd.setText(rs.getString(9));
+					textStatus.setText(rs.getString(10));
+					textDescription.setText(rs.getString(11));
+					textWhereAction.setText(rs.getString(12));					
 					
 					textRI.setEditable(false);
 					btnSearchRI.setEnabled(false);
