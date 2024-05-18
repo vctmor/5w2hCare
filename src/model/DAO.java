@@ -30,4 +30,70 @@ public class DAO {
 		}
 	}
 
+	
+
+
+    /**
+     * @param con the con to set
+     */
+    public void setCon(Connection con) {
+        this.con = con;
+    }
+
+    /**
+     * @return String return the driver
+     */
+    public String getDriver() {
+        return driver;
+    }
+
+    /**
+     * @param driver the driver to set
+     */
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
+    /**
+     * @return String return the url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * @param url the url to set
+     */
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    /**
+     * @return String return the user
+     */
+    public String getUser() {
+        return user;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    /**
+     * @return String return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }
