@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.DAO;
+import model.DatabaseManager;
 
 import java.awt.Component;
 import javax.swing.JLabel;
@@ -89,6 +90,12 @@ public class Care5w2h extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+
+		DatabaseManager data = new DatabaseManager();
+
+		;
+		System.out.println(DatabaseManager.getAllActions());
+
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -193,7 +200,6 @@ public class Care5w2h extends JFrame {
 		contentPane.add(lblNewLabel_8);
 		
 		textNameAction = new JTextField();
-		textNameAction.setForeground(UIManager.getColor("Button.background"));
 		textNameAction.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		textNameAction.addKeyListener(new KeyAdapter() {
 			@Override
