@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.Action;
 import model.DAO;
 import model.DatabaseManager;
 
@@ -28,6 +29,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
@@ -92,9 +94,12 @@ public class Care5w2h extends JFrame {
 	public static void main(String[] args) {
 
 		DatabaseManager data = new DatabaseManager();
-
-		;
-		System.out.println(DatabaseManager.getAllActions());
+		List<Action> actions = new DatabaseManager().getAllActions();
+		
+		double totalCost = actions.stream().mapToDouble(Action::getBudget).sum();
+		System.out.println("Actions: " + actions.size());
+		System.out.println("Data: " + data.getAllActions().size());
+		System.out.println("totalCost: " + totalCost);
 
 		
 		EventQueue.invokeLater(new Runnable() {
