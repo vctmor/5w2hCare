@@ -95,11 +95,14 @@ public class Care5w2h extends JFrame {
 
 		DatabaseManager data = new DatabaseManager();
 		List<Action> actions = new DatabaseManager().getAllActions();
+
+		//Todo: fazer um for para contar cada um dos 4 tipos de status e guardar num array
+		//int status = (int) actions.stream().filter(a -> a.getStatus() == 0).count();
+
 		
-		double totalCost = actions.stream().mapToDouble(Action::getBudget).sum();
-		System.out.println("Actions: " + actions.size());
-		System.out.println("Data: " + data.getAllActions().size());
-		System.out.println("totalCost: " + totalCost);
+
+		
+		
 
 		
 		EventQueue.invokeLater(new Runnable() {
