@@ -95,6 +95,7 @@ public class Care5w2h extends JFrame {
 	private JLabel showStarted;
 	private JLabel showTotalBudget;
 	private JLabel showCompleted;
+	private JLabel showDelayed;
 
 	
 
@@ -438,11 +439,11 @@ public class Care5w2h extends JFrame {
 		showNotStarted.setBounds(428, 97, 34, 15);
 		contentPane.add(showNotStarted);
 		
-		showStarted = new JLabel("");
-		showStarted.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		showStarted.setBackground(UIManager.getColor("Button.disabledText"));
-		showStarted.setBounds(428, 124, 34, 15);
-		contentPane.add(showStarted);
+		showDelayed = new JLabel("");
+		showDelayed.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		showDelayed.setBackground(UIManager.getColor("Button.disabledText"));
+		showDelayed.setBounds(428, 124, 34, 15);
+		contentPane.add(showDelayed);
 		
 		showTotalBudget = new JLabel("");
 		showTotalBudget.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -928,6 +929,10 @@ public class Care5w2h extends JFrame {
 		int completed = dashB.getongoingActions();
 		String completedStr = String.valueOf(completed);
 		showCompleted.setText(completedStr);
+
+		int delayed = dashB.getongoingActions();
+		String delayedStr = String.valueOf(delayed);
+		showDelayed.setText(delayedStr);
 
 		double totalCoast = dashB.getTotalCost();
 		String totalCoastStr = String.valueOf(totalCoast);
