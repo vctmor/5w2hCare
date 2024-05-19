@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import control.Dashboard;
 import model.Action;
 import model.DAO;
 import model.DatabaseManager;
@@ -44,12 +45,12 @@ import javax.swing.UIManager;
 
 public class Care5w2h extends JFrame {
 	
+	static Dashboard dashB = new Dashboard();
 	DAO dao = new DAO();
 	
 	private Connection con;
 	private PreparedStatement pst;
-	private ResultSet rs;
-	
+	private ResultSet rs;	
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -88,6 +89,15 @@ public class Care5w2h extends JFrame {
 	private JButton btnSearchRI;
 	private JButton btnAddAction;
 
+	private JLabel showTotalActions;
+	private JLabel showInProgress;
+	private JLabel showNotStarted;
+	private JLabel showStarted;
+	private JLabel showTotalBudget;
+	private JLabel showCompleted;
+
+	
+
 	/**
 	 * Launch the application.
 	 */
@@ -99,12 +109,10 @@ public class Care5w2h extends JFrame {
 		//Todo: fazer um for para contar cada um dos 4 tipos de status e guardar num array
 		//int status = (int) actions.stream().filter(a -> a.getStatus() == 0).count();
 
-		
-
-		
-		
-
-		
+		System.out.println(dashB.getTotalActions());
+		System.out.println(dashB.getTotalCost());
+		System.out.println(dashB.getCompleted());
+				
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -129,6 +137,7 @@ public class Care5w2h extends JFrame {
 
 				statusConnection();
 				setDate();
+				atualizeDashboard();
 				reset();
 				
 				setLocationRelativeTo(null);
@@ -287,6 +296,7 @@ public class Care5w2h extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				addAction();
+				atualizeDashboard();
 				
 			}
 		});
@@ -410,37 +420,37 @@ public class Care5w2h extends JFrame {
 		lblToalAcoes.setBounds(313, 35, 103, 15);
 		contentPane.add(lblToalAcoes);
 		
-		JLabel showTotalActions = new JLabel("");
+		showTotalActions = new JLabel("");
 		showTotalActions.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showTotalActions.setBackground(UIManager.getColor("Label.disabledForeground"));
 		showTotalActions.setBounds(428, 35, 34, 15);
 		contentPane.add(showTotalActions);
-		
-		JLabel showInProgress = new JLabel("");
+			
+		showInProgress = new JLabel("");
 		showInProgress.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showInProgress.setBackground(UIManager.getColor("Button.disabledText"));
 		showInProgress.setBounds(428, 55, 34, 15);
 		contentPane.add(showInProgress);
 		
-		JLabel showNotStarted = new JLabel("");
+		showNotStarted = new JLabel("");
 		showNotStarted.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showNotStarted.setBackground(UIManager.getColor("Button.disabledText"));
 		showNotStarted.setBounds(428, 97, 34, 15);
 		contentPane.add(showNotStarted);
 		
-		JLabel showStarted = new JLabel("");
+		showStarted = new JLabel("");
 		showStarted.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showStarted.setBackground(UIManager.getColor("Button.disabledText"));
 		showStarted.setBounds(428, 124, 34, 15);
 		contentPane.add(showStarted);
 		
-		JLabel showTotalBudget = new JLabel("");
+		showTotalBudget = new JLabel("");
 		showTotalBudget.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showTotalBudget.setBackground(UIManager.getColor("Button.disabledText"));
 		showTotalBudget.setBounds(428, 181, 34, 15);
 		contentPane.add(showTotalBudget);
 		
-		JLabel showCompleted = new JLabel("");
+		showCompleted = new JLabel("");
 		showCompleted.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showCompleted.setBackground(UIManager.getColor("Button.disabledText"));
 		showCompleted.setBounds(428, 145, 34, 15);
@@ -593,7 +603,6 @@ public class Care5w2h extends JFrame {
 			// TODO: handle exception
 			System.err.println(e);
 		}
-		
 	}
 	
 	private void addAction() {
@@ -605,10 +614,8 @@ public class Care5w2h extends JFrame {
 			
 		} else {
 
-			insertDB();
-
+			insertDB();			
 		}
-		
 	}
 	
 	private void searchRI() {
@@ -739,23 +746,16 @@ public class Care5w2h extends JFrame {
 					textStatus.setText(rs.getString(10));
 					textDescription.setText(rs.getString(11));
 					textWhereAction.setText(rs.getString(12));
-					
-					
-					//TODO: Recuperar os dados dos demais campos
-					
 				}
+				
 				con.close();
 				
 			} catch (Exception e) {
 				
 				System.out.println(e);
-			}
+			}			
 			
-		} else {
-			
-			scrollPaneList.setVisible(false);
-
-		}
+		} else { scrollPaneList.setVisible(false); }
 		
 	}
 	
@@ -860,12 +860,7 @@ public class Care5w2h extends JFrame {
 					System.out.println(confirm);
 					if (confirm == 1) {
 
-						JOptionPane.showMessageDialog(null, "Ação atualizada com sucesso!");
-						
-						//TODO: Fazer método reset();
-						//reset();
-
-					} else {
+						JOptionPane.showMessageDialog(null, "Ação atualizada com sucesso!");					} else {
 
 						JOptionPane.showMessageDialog(null, "Erro! Ação não atualizada");
 						System.out.println("Erro! Ação não atualizada");
@@ -881,11 +876,7 @@ public class Care5w2h extends JFrame {
 				// TODO: handle exception
 				System.err.println(e);
 			}
-			
-
 		}
-		
-		
 	}
 	
 	private void exclude() {
@@ -917,14 +908,37 @@ public class Care5w2h extends JFrame {
 				
 				System.out.println(e);
 			}
-			
 		}
-	
 	}
 	
+	private void atualizeDashboard(){		
+
+		int totalActions = dashB.getTotalActions();
+		String totalActionsStr = String.valueOf(totalActions);
+		showTotalActions.setText(totalActionsStr);
+
+		int notStarted = dashB.getnotStarted();
+		String notStartedStr = String.valueOf(notStarted);
+		showNotStarted.setText(notStartedStr);
+
+		int inProgres = dashB.getongoingActions();
+		String inProgresStr = String.valueOf(inProgres);
+		showInProgress.setText(inProgresStr);
+
+		int completed = dashB.getongoingActions();
+		String completedStr = String.valueOf(completed);
+		showCompleted.setText(completedStr);
+
+		double totalCoast = dashB.getTotalCost();
+		String totalCoastStr = String.valueOf(totalCoast);
+		
+		showTotalBudget.setText(totalCoastStr);
+	}
 	
 	private void reset() {
-		//TODO: adicionar os demais campos
+
+		atualizeDashboard();
+
 		scrollPaneList.setVisible(false);
 		textRI.setText(null);
 		textNameAction.setText(null);
@@ -939,8 +953,7 @@ public class Care5w2h extends JFrame {
 		textEnd.setText(null);
 		textStatus.setText(null);
 		textDescription.setText(null);
-		textWhereAction.setText(null);
-		
+		textWhereAction.setText(null);		
 		
 		textRI.setEnabled(true);
 		textRI.setEditable(true);

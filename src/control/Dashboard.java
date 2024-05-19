@@ -39,8 +39,8 @@ public class Dashboard {
 			int currentStatus = a.getStatus();
 			statusCount[currentStatus]++; // Incrementa a contagem para o status atual
 		}
-        ongoingActions = statusCount[0];//Não iniciado
-        notStarted = statusCount[1];//iniciado
+        notStarted = statusCount[0];//Não iniciado
+        ongoingActions = statusCount[1];//iniciado
         delayed = statusCount[2];//concluido
         completed = statusCount[3];//atrasado
 
@@ -53,8 +53,7 @@ public class Dashboard {
         noUrgency = urgencyCount[0];
         littleUrgent = urgencyCount[1];
         veryUrgent = urgencyCount[2];
-        extremelyUrgent = urgencyCount[3];        
-     
+        extremelyUrgent = urgencyCount[3];
     }
 
     public int getTotalActions() {return totalActions;}
@@ -68,7 +67,7 @@ public class Dashboard {
     public int getDelayed() {return delayed;}
 
     public int getCompleted() {return completed;}
-    
+
 
     public int getNoUrgency() {return noUrgency;}
 
