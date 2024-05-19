@@ -10,14 +10,6 @@ public class Action {
     private LocalDate starDate;
     private LocalDate endDate;
 
-    //TODO: mover para a classe Dashboard:
-    private int totalActions;
-    private String inStrides;
-    private int uninitiated;
-    private int delayed;
-    private int completed;
-    private double totalCost;
-
     public Action(int urgency, double budget, LocalDate starDate, LocalDate endDate, int status){
         
         this.urgency = urgency;
@@ -96,57 +88,5 @@ public class Action {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-
-    //TODO: mover para a classe Dasboard:
-
-    /**
-     * @return int return the totalActions
-     */
-    public int getTotalActions() {
-        return totalActions;
-    }
-
-   
-
-    /**
-     * @return String return the inStrides
-     */
-    public String getInStrides() {
-        return inStrides;
-    }
-
     
-
-    /**
-     * @return int return the uninitiated
-     */
-    public int getUninitiated() {
-        return uninitiated;
-    }
-
-    
-
-    /**
-     * @return int return the delayed
-     */
-    public int getDelayed() {
-        return delayed;
-    }
-
-    
-    /**
-     * @return int return the completed
-     */
-    public int getCompleted() {
-        return completed;
-    }
-
-   
-    /**
-     * @return double return the totalCost
-     */
-    public double getTotalCost() {
-        return totalCost;
-    }
-
 }
