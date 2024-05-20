@@ -21,6 +21,13 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 
+//import javax.swing.*;
+import org.jfree.chart.ChartPanel;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -104,16 +111,6 @@ public class Care5w2h extends JFrame {
 	 */
 	public static void main(String[] args) {
 
-		DatabaseManager data = new DatabaseManager();
-		List<Action> actions = new DatabaseManager().getAllActions();
-
-		//Todo: fazer um for para contar cada um dos 4 tipos de status e guardar num array
-		//int status = (int) actions.stream().filter(a -> a.getStatus() == 0).count();
-
-		System.out.println(dashB.getTotalActions());
-		System.out.println(dashB.getTotalCost());
-		System.out.println(dashB.getCompleted());
-				
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -456,8 +453,9 @@ public class Care5w2h extends JFrame {
 		showCompleted.setBackground(UIManager.getColor("Button.disabledText"));
 		showCompleted.setBounds(428, 145, 34, 15);
 		contentPane.add(showCompleted);
+
 	} // fim construtor
-	
+
 	private void statusConnection() {
 		
 		try {
@@ -926,11 +924,11 @@ public class Care5w2h extends JFrame {
 		String inProgresStr = String.valueOf(inProgres);
 		showInProgress.setText(inProgresStr);
 
-		int completed = dashB.getongoingActions();
+		int completed = dashB.getCompleted();
 		String completedStr = String.valueOf(completed);
 		showCompleted.setText(completedStr);
 
-		int delayed = dashB.getongoingActions();
+		int delayed = dashB.getDelayed();
 		String delayedStr = String.valueOf(delayed);
 		showDelayed.setText(delayedStr);
 
