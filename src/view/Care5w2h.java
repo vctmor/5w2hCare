@@ -28,6 +28,19 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Toolkit;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -54,6 +67,11 @@ public class Care5w2h extends JFrame {
 	
 	static Dashboard dashB = new Dashboard();
 	DAO dao = new DAO();
+
+	static Care5w2h frame;
+
+	static PieChart pizzac = new PieChart();
+		
 	
 	private Connection con;
 	private PreparedStatement pst;
@@ -104,7 +122,7 @@ public class Care5w2h extends JFrame {
 	private JLabel showCompleted;
 	private JLabel showDelayed;
 
-	
+	private JLabel pizza;	
 
 	/**
 	 * Launch the application.
@@ -114,29 +132,33 @@ public class Care5w2h extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Care5w2h frame = new Care5w2h();
+					frame = new Care5w2h();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 					
 				}
 			}
 		});
+
+		//EventQueue.invokeLater(PieChart::run);
 	}
 
 	/**
 	 * Create the frame.
 	 */
 	public Care5w2h() {
-		
+		;
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
-
+			
 				statusConnection();
 				setDate();
 				atualizeDashboard();
 				reset();
+				pieChart();
 				
 				setLocationRelativeTo(null);
 			}
@@ -454,7 +476,50 @@ public class Care5w2h extends JFrame {
 		showCompleted.setBounds(428, 145, 34, 15);
 		contentPane.add(showCompleted);
 
+		/*
+		 pizza = new JLabel("");
+		pizza.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		pizza.setBackground(UIManager.getColor("Button.disabledText"));
+		pizza.setBounds(313, 290, 200, 150);
+		contentPane.add(pizza);
+		//pizza.add();
+		 */
+
+
 	} // fim construtor
+
+	public void pieChart(){
+
+		//TODO: fazer um novo projeto e 'mexer' no código para compreender
+
+
+		//TODO: Reproduzir a 'mesma janela' principal do Care5w2h e tetar fazer o gráfico
+
+		// Calcula a posição para o quarto quadrante (meio da tela)
+		Dimension sd = Toolkit.getDefaultToolkit().getScreenSize();
+		int x = sd.width / 2;
+		int y = sd.height / 2;
+		frame.setLocation(x, y);
+
+		// Cria o painel aonde o gráfico será mostrado.
+		JPanel primeiroGrafico = new JPanel();
+		Dimension tamanhoArea = new Dimension(200, 150);
+		primeiroGrafico.setPreferredSize(tamanhoArea);
+		primeiroGrafico.setMinimumSize(tamanhoArea);
+		frame.add(primeiroGrafico);
+
+		DefaultPieDataset dpd = new DefaultPieDataset();
+		dpd.setValue("Valor 1", 10);
+		dpd.setValue("Valor 2", 20);
+		dpd.setValue("Valor 3", 30);
+		dpd.setValue("Valor 4", 40);
+
+		JFreeChart grafico = ChartFactory.createPieChart("Nome do Gráfico", dpd, true, true, true);
+		ChartPanel chartPanel = new ChartPanel(grafico);
+		primeiroGrafico.add(chartPanel);
+
+		frame.setVisible(true);
+	}
 
 	private void statusConnection() {
 		
