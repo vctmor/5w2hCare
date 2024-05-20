@@ -448,7 +448,7 @@ public class Care5w2h extends JFrame {
 		showTotalBudget = new JLabel("");
 		showTotalBudget.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showTotalBudget.setBackground(UIManager.getColor("Button.disabledText"));
-		showTotalBudget.setBounds(428, 181, 34, 15);
+		showTotalBudget.setBounds(428, 181, 80, 15);
 		contentPane.add(showTotalBudget);
 		
 		showCompleted = new JLabel("");
