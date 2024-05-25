@@ -70,7 +70,7 @@ public class Care5w2h extends JFrame {
 
 	static Care5w2h frame;
 
-	static PieChart pizzac = new PieChart();
+	static PieChart chart = new PieChart();
 		
 	
 	private Connection con;
@@ -135,6 +135,7 @@ public class Care5w2h extends JFrame {
 					frame = new Care5w2h();
 					frame.setVisible(true);
 					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 					
@@ -158,8 +159,9 @@ public class Care5w2h extends JFrame {
 				setDate();
 				atualizeDashboard();
 				reset();		
-				pieChart();
+				showPieChart();
 				setLocationRelativeTo(null);
+				
 			}
 		});
 		
@@ -487,7 +489,7 @@ public class Care5w2h extends JFrame {
 
 	} // fim construtor
 
-	public void pieChart(){
+	public void showPieChart(){
 
 		//TODO: fazer um novo projeto e 'mexer' no código para compreender
 
@@ -515,8 +517,8 @@ public class Care5w2h extends JFrame {
 		dpd.setValue("Valor 3", 30);
 		dpd.setValue("Valor 4", 40);
 
-		JFreeChart grafico = ChartFactory.createPieChart("Nome do Gráfico", dpd, true, true, true);
-		ChartPanel chartPanel = new ChartPanel(grafico);
+		//JFreeChart grafico = ChartFactory.createPieChart("Nome do Gráfico", dpd, true, true, true);
+		ChartPanel chartPanel = new ChartPanel(chart.pieChart());
 		chartPanel.setMouseWheelEnabled(true);
 		chartPanel.setPreferredSize(new Dimension(200, 200));
 		pizza.setLayout(new BorderLayout());
@@ -524,7 +526,7 @@ public class Care5w2h extends JFrame {
 
 		pack();
 		repaint();
-		frame.setVisible(true);
+		//frame.setVisible(true);
 	}
 
 	private void statusConnection() {
