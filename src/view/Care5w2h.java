@@ -157,9 +157,8 @@ public class Care5w2h extends JFrame {
 				statusConnection();
 				setDate();
 				atualizeDashboard();
-				reset();
+				reset();		
 				pieChart();
-				
 				setLocationRelativeTo(null);
 			}
 		});
@@ -476,14 +475,14 @@ public class Care5w2h extends JFrame {
 		showCompleted.setBounds(428, 145, 34, 15);
 		contentPane.add(showCompleted);
 
-		/*
-		 pizza = new JLabel("");
+		
+		pizza = new JLabel("");
 		pizza.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		pizza.setBackground(UIManager.getColor("Button.disabledText"));
 		pizza.setBounds(313, 290, 200, 150);
 		contentPane.add(pizza);
 		//pizza.add();
-		 */
+		
 
 
 	} // fim construtor
@@ -501,12 +500,14 @@ public class Care5w2h extends JFrame {
 		int y = sd.height / 2;
 		frame.setLocation(x, y);
 
-		// Cria o painel aonde o gráfico será mostrado.
+		/*
+		 // Cria o painel aonde o gráfico será mostrado.
 		JPanel primeiroGrafico = new JPanel();
 		Dimension tamanhoArea = new Dimension(200, 150);
 		primeiroGrafico.setPreferredSize(tamanhoArea);
 		primeiroGrafico.setMinimumSize(tamanhoArea);
 		frame.add(primeiroGrafico);
+		 */
 
 		DefaultPieDataset dpd = new DefaultPieDataset();
 		dpd.setValue("Valor 1", 10);
@@ -516,8 +517,13 @@ public class Care5w2h extends JFrame {
 
 		JFreeChart grafico = ChartFactory.createPieChart("Nome do Gráfico", dpd, true, true, true);
 		ChartPanel chartPanel = new ChartPanel(grafico);
-		primeiroGrafico.add(chartPanel);
+		chartPanel.setMouseWheelEnabled(true);
+		chartPanel.setPreferredSize(new Dimension(200, 200));
+		pizza.setLayout(new BorderLayout());
+		pizza.add(chartPanel, BorderLayout.NORTH);
 
+		pack();
+		repaint();
 		frame.setVisible(true);
 	}
 

@@ -12,7 +12,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
-public class PieChart {
+public class PieChart extends JFrame {
 
 
     public JFreeChart run() {
