@@ -98,7 +98,6 @@ public class Care5w2h extends JFrame {
 	private JLabel lblGernciaResposvel_3;
 	private JLabel lblGernciaResposvel_1;
 	private JLabel lblCustoTotal;
-	private JLabel lblStatusGeralgrfico;
 	private JTextField textRI;
 	private JPanel panel;
 
@@ -110,7 +109,6 @@ public class Care5w2h extends JFrame {
 	private JLabel lblDescri;
 	private JScrollPane scrollPaneList;
 	private JList listNames;
-	private JButton btnCreateReport;
 	private JButton btnSearchRI;
 	private JButton btnAddAction;
 
@@ -122,7 +120,7 @@ public class Care5w2h extends JFrame {
 	private JLabel showCompleted;
 	private JLabel showDelayed;
 
-	private JLabel pizza;
+	private JLabel pizzaMetricas;
 
 	/**
 	 * Launch the application.
@@ -278,7 +276,7 @@ public class Care5w2h extends JFrame {
 		
 		textWhereAction = new JTextField();
 		textWhereAction.setColumns(10);
-		textWhereAction.setBounds(107, 416, 187, 19);
+		textWhereAction.setBounds(107, 416, 188, 19);
 		contentPane.add(textWhereAction);
 		
 		textJustification = new JTextField();
@@ -305,11 +303,11 @@ public class Care5w2h extends JFrame {
 		
 		textEnd = new JTextField();
 		textEnd.setColumns(10);
-		textEnd.setBounds(214, 445, 80, 19);
+		textEnd.setBounds(206, 450, 89, 19);
 		contentPane.add(textEnd);
 		
 		lblNewLabel_9 = new JLabel("Fim:");
-		lblNewLabel_9.setBounds(181, 447, 34, 15);
+		lblNewLabel_9.setBounds(173, 452, 34, 15);
 		contentPane.add(lblNewLabel_9);
 		
 		btnAddAction = new JButton("Cadastrar Ação");
@@ -321,20 +319,8 @@ public class Care5w2h extends JFrame {
 				
 			}
 		});
-		btnAddAction.setBounds(12, 507, 147, 25);
+		btnAddAction.setBounds(13, 507, 147, 25);
 		contentPane.add(btnAddAction);
-		
-		btnCreateReport = new JButton("Gerar Relatório");
-		btnCreateReport.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				//createReport();
-				
-			}
-		});
-		btnCreateReport.setToolTipText("Gera PDF contendo as Ações cadastradas");
-		btnCreateReport.setBounds(181, 544, 145, 25);
-		contentPane.add(btnCreateReport);
 		
 		btnUpdate = new JButton("Atualizar");
 		btnUpdate.addActionListener(new ActionListener() {
@@ -343,7 +329,7 @@ public class Care5w2h extends JFrame {
 				update();
 			}
 		});
-		btnUpdate.setBounds(12, 544, 147, 25);
+		btnUpdate.setBounds(13, 544, 147, 25);
 		contentPane.add(btnUpdate);
 		
 		btnExcludeAction = new JButton("Excluir Ação");
@@ -353,42 +339,38 @@ public class Care5w2h extends JFrame {
 				exclude();
 			}
 		});
-		btnExcludeAction.setBounds(181, 505, 147, 25);
+		btnExcludeAction.setBounds(174, 544, 122, 25);
 		contentPane.add(btnExcludeAction);
 		
-		btnResetFields = new JButton("Limpar Campos");
+		btnResetFields = new JButton("Limpar");
 		btnResetFields.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				reset();
 			}
 		});
-		btnResetFields.setBounds(181, 470, 147, 25);
+		btnResetFields.setBounds(173, 509, 123, 25);
 		contentPane.add(btnResetFields);
 		
 		lblNoIniciada = new JLabel("Não Iniciada:");
-		lblNoIniciada.setBounds(313, 97, 93, 15);
+		lblNoIniciada.setBounds(312, 88, 93, 15);
 		contentPane.add(lblNoIniciada);
 		
 		lblGernciaResposvel_2 = new JLabel("Atrasada:");
-		lblGernciaResposvel_2.setBounds(313, 124, 70, 15);
+		lblGernciaResposvel_2.setBounds(497, 12, 70, 15);
 		contentPane.add(lblGernciaResposvel_2);
 		
 		lblGernciaResposvel_3 = new JLabel("Em andamento:");
-		lblGernciaResposvel_3.setBounds(313, 55, 114, 15);
+		lblGernciaResposvel_3.setBounds(312, 49, 114, 15);
 		contentPane.add(lblGernciaResposvel_3);
 		
 		lblGernciaResposvel_1 = new JLabel("Concluídas:");
-		lblGernciaResposvel_1.setBounds(313, 145, 93, 15);
+		lblGernciaResposvel_1.setBounds(497, 49, 93, 15);
 		contentPane.add(lblGernciaResposvel_1);
 		
-		lblCustoTotal = new JLabel("Custo Total");
-		lblCustoTotal.setBounds(313, 183, 93, 15);
+		lblCustoTotal = new JLabel("Custo Total:");
+		lblCustoTotal.setBounds(497, 88, 93, 15);
 		contentPane.add(lblCustoTotal);
-		
-		lblStatusGeralgrfico = new JLabel("Status Geral (gráfico piza)");
-		lblStatusGeralgrfico.setBounds(313, 248, 177, 15);
-		contentPane.add(lblStatusGeralgrfico);
 		
 		JLabel lblNewLabel_9_1 = new JLabel("RI:");
 		lblNewLabel_9_1.setBounds(151, 160, 24, 15);
@@ -438,51 +420,57 @@ public class Care5w2h extends JFrame {
 		contentPane.add(btnSearchRI);
 		
 		JLabel lblToalAcoes = new JLabel("Toal de Ações:");
-		lblToalAcoes.setBounds(313, 35, 103, 15);
+		lblToalAcoes.setBounds(312, 14, 103, 15);
 		contentPane.add(lblToalAcoes);
 		
 		showTotalActions = new JLabel("");
 		showTotalActions.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showTotalActions.setBackground(UIManager.getColor("Label.disabledForeground"));
-		showTotalActions.setBounds(428, 35, 34, 15);
+		showTotalActions.setBounds(427, 14, 34, 15);
 		contentPane.add(showTotalActions);
 			
 		showInProgress = new JLabel("");
 		showInProgress.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showInProgress.setBackground(UIManager.getColor("Button.disabledText"));
-		showInProgress.setBounds(428, 55, 34, 15);
+		showInProgress.setBounds(427, 49, 34, 15);
 		contentPane.add(showInProgress);
 		
 		showNotStarted = new JLabel("");
 		showNotStarted.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showNotStarted.setBackground(UIManager.getColor("Button.disabledText"));
-		showNotStarted.setBounds(428, 97, 34, 15);
+		showNotStarted.setBounds(427, 88, 34, 15);
 		contentPane.add(showNotStarted);
 		
 		showDelayed = new JLabel("");
 		showDelayed.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showDelayed.setBackground(UIManager.getColor("Button.disabledText"));
-		showDelayed.setBounds(428, 124, 34, 15);
+		showDelayed.setBounds(612, 12, 34, 15);
 		contentPane.add(showDelayed);
 		
 		showTotalBudget = new JLabel("");
 		showTotalBudget.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showTotalBudget.setBackground(UIManager.getColor("Button.disabledText"));
-		showTotalBudget.setBounds(428, 181, 80, 15);
+		showTotalBudget.setBounds(612, 86, 94, 15);
 		contentPane.add(showTotalBudget);
 		
 		showCompleted = new JLabel("");
 		showCompleted.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showCompleted.setBackground(UIManager.getColor("Button.disabledText"));
-		showCompleted.setBounds(428, 145, 34, 15);
+		showCompleted.setBounds(612, 49, 34, 15);
 		contentPane.add(showCompleted);
 
 		
-		pizza = new JLabel("");
-		pizza.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		pizza.setBackground(UIManager.getColor("Button.disabledText"));
-		pizza.setBounds(313, 290, 200, 150);
-		contentPane.add(pizza);
+		pizzaMetricas = new JLabel("");
+		pizzaMetricas.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		pizzaMetricas.setBackground(UIManager.getColor("Button.disabledText"));
+		pizzaMetricas.setBounds(313, 124, 393, 195);
+		contentPane.add(pizzaMetricas);
+		
+		JLabel pizzaPrioridade = new JLabel("");
+		pizzaPrioridade.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		pizzaPrioridade.setBackground(UIManager.getColor("Button.disabledText"));
+		pizzaPrioridade.setBounds(313, 337, 393, 195);
+		contentPane.add(pizzaPrioridade);
 		//pizza.add();
 		
 
@@ -496,8 +484,8 @@ public class Care5w2h extends JFrame {
 		Dimension size = new Dimension(300, 300);
 		chartPanel.setPreferredSize(size);
 		
-		pizza.setLayout(new BorderLayout());
-		pizza.add(chartPanel, BorderLayout.CENTER);
+		pizzaMetricas.setLayout(new BorderLayout());
+		pizzaMetricas.add(chartPanel, BorderLayout.CENTER);
 
 		pack();
 		repaint();
@@ -701,7 +689,7 @@ public class Care5w2h extends JFrame {
 					btnSearchRI.setEnabled(false);
 					btnUpdate.setEnabled(true);
 					btnExcludeAction.setEnabled(true);  	
-					btnCreateReport.setEnabled(false);
+					//btnCreateReport.setEnabled(false);
 					btnAddAction.setEnabled(false);
 					
 				} else {
@@ -718,7 +706,7 @@ public class Care5w2h extends JFrame {
 						btnAddAction.setEnabled(true);
 						btnUpdate.setEnabled(false);
 						btnExcludeAction.setEnabled(false);  	
-						btnCreateReport.setEnabled(false);
+						//btnCreateReport.setEnabled(false);
 						
 				} else {
 					btnAddAction.setEnabled(true);
@@ -1013,6 +1001,6 @@ public class Care5w2h extends JFrame {
 		btnAddAction.setEnabled(true);
 		btnUpdate.setEnabled(false);
 		btnExcludeAction.setEnabled(false);
-		btnCreateReport.setEnabled(true);
+		//btnCreateReport.setEnabled(true);
 	}
 } // ----------
