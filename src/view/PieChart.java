@@ -1,0 +1,93 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Toolkit;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
+import control.Dashboard;
+
+public class PieChart extends JFrame {
+
+    Dashboard metrics = new Dashboard();
+
+    private double ongoingPercent = metrics.getongoingActions()/ (double)metrics.getTotalActions();
+    private double notStartedPercent = metrics.getnotStarted()/ (double)metrics.getTotalActions();
+    private double delayedPercent = metrics.getDelayed()/ (double)metrics.getTotalActions();
+    private double completedPercent = metrics.getCompleted()/ (double)metrics.getTotalActions();
+
+
+    public JFreeChart run() {
+        // Cria uma tela com uma panel vazia dentro. Usa esta panel para definir
+        // o tamanho mínimo e preferencial da janela.
+        JFrame frame = new JFrame("Olá, JFreeChart!");
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JPanel raiz = new JPanel();
+        raiz.setLayout(new BorderLayout());
+        Dimension tamanho = new Dimension(600, 480);
+        raiz.setPreferredSize(tamanho);
+        raiz.setMinimumSize(tamanho);
+        frame.add(raiz);
+        frame.pack();
+        Dimension sd = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setLocation((sd.width - frame.getWidth()) / 2, (sd.height - frame.getHeight()) / 2);
+
+        // Cria o painel aonde o gráfico será mostrado.
+        JPanel primeiroGrafico = new JPanel();
+        Dimension tamanhoArea = new Dimension(200, 150);
+        primeiroGrafico.setPreferredSize(tamanhoArea);
+        primeiroGrafico.setMinimumSize(tamanhoArea);
+        raiz.add(primeiroGrafico, BorderLayout.CENTER);
+
+        // Cria o botão.
+        JPanel areaBotoes = new JPanel();
+        JButton botao = new JButton("Criar gráfico");
+        areaBotoes.add(botao);
+        raiz.add(areaBotoes, BorderLayout.SOUTH);
+
+        // Define o que acontece ao clicar no botão.
+        botao.addActionListener(e -> { });
+
+         DefaultPieDataset dpd = new DefaultPieDataset();
+            dpd.setValue("Valor 1", 10);
+            dpd.setValue("Valor 2", 20);
+            dpd.setValue("Valor 3", 30);
+            dpd.setValue("Valor 4", 40);
+
+            JFreeChart grafico = ChartFactory.createPieChart("Nome do Gráfico", dpd, true, true, true);
+//frame.setVisible(true);
+            return grafico;
+            //ChartPanel chartPanel = new ChartPanel(grafico);
+            //primeiroGrafico.add(chartPanel);
+            //primeiroGrafico.validate();
+
+        // Mostra a tela.
+        
+       
+    }
+
+    @SuppressWarnings("unchecked")
+    public JFreeChart pieChart() {
+
+    @SuppressWarnings("rawtypes")
+    DefaultPieDataset dpd = new DefaultPieDataset();
+    System.out.println(notStartedPercent);
+    dpd.setValue("Em andamento", ongoingPercent);
+    dpd.setValue("Não iniciadas",notStartedPercent);
+    dpd.setValue("Atrasadas", delayedPercent);
+    dpd.setValue("Concluídas", completedPercent);
+
+    JFreeChart grafico = ChartFactory.createPieChart("Métricas das Ações", dpd, true, true, true);
+
+    return grafico;
+    }
+}

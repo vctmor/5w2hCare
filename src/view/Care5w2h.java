@@ -21,6 +21,26 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 
+//import javax.swing.*;
+import org.jfree.chart.ChartPanel;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Toolkit;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -47,6 +67,11 @@ public class Care5w2h extends JFrame {
 	
 	static Dashboard dashB = new Dashboard();
 	DAO dao = new DAO();
+
+	static Care5w2h frame;
+
+	static PieChart chart = new PieChart();
+		
 	
 	private Connection con;
 	private PreparedStatement pst;
@@ -97,13 +122,18 @@ public class Care5w2h extends JFrame {
 	private JLabel showCompleted;
 	private JLabel showDelayed;
 
+<<<<<<< HEAD
 	
+=======
+	private JLabel pizza;	
+>>>>>>> @{-1}
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 
+<<<<<<< HEAD
 		DatabaseManager data = new DatabaseManager();
 		List<Action> actions = new DatabaseManager().getAllActions();
 
@@ -114,34 +144,46 @@ public class Care5w2h extends JFrame {
 		System.out.println(dashB.getTotalCost());
 		System.out.println(dashB.getCompleted());
 				
+=======
+>>>>>>> @{-1}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Care5w2h frame = new Care5w2h();
+					frame = new Care5w2h();
 					frame.setVisible(true);
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 					
 				}
 			}
 		});
+
+		//EventQueue.invokeLater(PieChart::run);
 	}
 
 	/**
 	 * Create the frame.
 	 */
 	public Care5w2h() {
-		
+		;
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
-
+			
 				statusConnection();
 				setDate();
 				atualizeDashboard();
+<<<<<<< HEAD
 				reset();
 				
+=======
+				reset();		
+				showPieChart();
+>>>>>>> @{-1}
 				setLocationRelativeTo(null);
+				
 			}
 		});
 		
@@ -448,7 +490,7 @@ public class Care5w2h extends JFrame {
 		showTotalBudget = new JLabel("");
 		showTotalBudget.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showTotalBudget.setBackground(UIManager.getColor("Button.disabledText"));
-		showTotalBudget.setBounds(428, 181, 34, 15);
+		showTotalBudget.setBounds(428, 181, 80, 15);
 		contentPane.add(showTotalBudget);
 		
 		showCompleted = new JLabel("");
@@ -456,8 +498,34 @@ public class Care5w2h extends JFrame {
 		showCompleted.setBackground(UIManager.getColor("Button.disabledText"));
 		showCompleted.setBounds(428, 145, 34, 15);
 		contentPane.add(showCompleted);
+
+		
+		pizza = new JLabel("");
+		pizza.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		pizza.setBackground(UIManager.getColor("Button.disabledText"));
+		pizza.setBounds(313, 290, 200, 150);
+		contentPane.add(pizza);
+		//pizza.add();
+		
+
+
 	} // fim construtor
-	
+
+	public void showPieChart(){
+
+		ChartPanel chartPanel = new ChartPanel(chart.pieChart());
+		chartPanel.setMouseWheelEnabled(true);
+		Dimension size = new Dimension(300, 300);
+		chartPanel.setPreferredSize(size);
+		
+		pizza.setLayout(new BorderLayout());
+		pizza.add(chartPanel, BorderLayout.CENTER);
+
+		pack();
+		repaint();
+		//frame.setVisible(true);
+	}
+
 	private void statusConnection() {
 		
 		try {
@@ -926,11 +994,19 @@ public class Care5w2h extends JFrame {
 		String inProgresStr = String.valueOf(inProgres);
 		showInProgress.setText(inProgresStr);
 
+<<<<<<< HEAD
 		int completed = dashB.getongoingActions();
 		String completedStr = String.valueOf(completed);
 		showCompleted.setText(completedStr);
 
 		int delayed = dashB.getongoingActions();
+=======
+		int completed = dashB.getCompleted();
+		String completedStr = String.valueOf(completed);
+		showCompleted.setText(completedStr);
+
+		int delayed = dashB.getDelayed();
+>>>>>>> @{-1}
 		String delayedStr = String.valueOf(delayed);
 		showDelayed.setText(delayedStr);
 
