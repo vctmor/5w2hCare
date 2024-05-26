@@ -491,38 +491,13 @@ public class Care5w2h extends JFrame {
 
 	public void showPieChart(){
 
-		//TODO: fazer um novo projeto e 'mexer' no código para compreender
-
-
-		//TODO: Reproduzir a 'mesma janela' principal do Care5w2h e tetar fazer o gráfico
-
-		// Calcula a posição para o quarto quadrante (meio da tela)
-		Dimension sd = Toolkit.getDefaultToolkit().getScreenSize();
-		int x = sd.width / 2;
-		int y = sd.height / 2;
-		frame.setLocation(x, y);
-
-		/*
-		 // Cria o painel aonde o gráfico será mostrado.
-		JPanel primeiroGrafico = new JPanel();
-		Dimension tamanhoArea = new Dimension(200, 150);
-		primeiroGrafico.setPreferredSize(tamanhoArea);
-		primeiroGrafico.setMinimumSize(tamanhoArea);
-		frame.add(primeiroGrafico);
-		 */
-
-		DefaultPieDataset dpd = new DefaultPieDataset();
-		dpd.setValue("Valor 1", 10);
-		dpd.setValue("Valor 2", 20);
-		dpd.setValue("Valor 3", 30);
-		dpd.setValue("Valor 4", 40);
-
-		//JFreeChart grafico = ChartFactory.createPieChart("Nome do Gráfico", dpd, true, true, true);
 		ChartPanel chartPanel = new ChartPanel(chart.pieChart());
 		chartPanel.setMouseWheelEnabled(true);
-		chartPanel.setPreferredSize(new Dimension(200, 200));
+		Dimension size = new Dimension(300, 300);
+		chartPanel.setPreferredSize(size);
+		
 		pizza.setLayout(new BorderLayout());
-		pizza.add(chartPanel, BorderLayout.NORTH);
+		pizza.add(chartPanel, BorderLayout.CENTER);
 
 		pack();
 		repaint();

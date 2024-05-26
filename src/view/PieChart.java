@@ -12,7 +12,16 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
+import control.Dashboard;
+
 public class PieChart extends JFrame {
+
+    Dashboard metrics = new Dashboard();
+
+    private double ongoingPercent = metrics.getongoingActions()/ (double)metrics.getTotalActions();
+    private double notStartedPercent = metrics.getnotStarted()/ (double)metrics.getTotalActions();
+    private double delayedPercent = metrics.getDelayed()/ (double)metrics.getTotalActions();
+    private double completedPercent = metrics.getCompleted()/ (double)metrics.getTotalActions();
 
 
     public JFreeChart run() {
@@ -66,15 +75,18 @@ public class PieChart extends JFrame {
        
     }
 
+    @SuppressWarnings("unchecked")
     public JFreeChart pieChart() {
 
+    @SuppressWarnings("rawtypes")
     DefaultPieDataset dpd = new DefaultPieDataset();
-    dpd.setValue("Valor 1", 10);
-    dpd.setValue("Valor 2", 20);
-    dpd.setValue("Valor 3", 30);
-    dpd.setValue("Valor 4", 40);
+    System.out.println(notStartedPercent);
+    dpd.setValue("Em andamento", ongoingPercent);
+    dpd.setValue("Não iniciadas",notStartedPercent);
+    dpd.setValue("Atrasadas", delayedPercent);
+    dpd.setValue("Concluídas", completedPercent);
 
-    JFreeChart grafico = ChartFactory.createPieChart("Nome do Gráfico", dpd, true, true, true);
+    JFreeChart grafico = ChartFactory.createPieChart("Métricas das Ações", dpd, true, true, true);
 
     return grafico;
     }
