@@ -122,30 +122,13 @@ public class Care5w2h extends JFrame {
 	private JLabel showCompleted;
 	private JLabel showDelayed;
 
-<<<<<<< HEAD
-	
-=======
-	private JLabel pizza;	
->>>>>>> @{-1}
+	private JLabel pizza;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 
-<<<<<<< HEAD
-		DatabaseManager data = new DatabaseManager();
-		List<Action> actions = new DatabaseManager().getAllActions();
-
-		//Todo: fazer um for para contar cada um dos 4 tipos de status e guardar num array
-		//int status = (int) actions.stream().filter(a -> a.getStatus() == 0).count();
-
-		System.out.println(dashB.getTotalActions());
-		System.out.println(dashB.getTotalCost());
-		System.out.println(dashB.getCompleted());
-				
-=======
->>>>>>> @{-1}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -175,13 +158,8 @@ public class Care5w2h extends JFrame {
 				statusConnection();
 				setDate();
 				atualizeDashboard();
-<<<<<<< HEAD
-				reset();
-				
-=======
 				reset();		
 				showPieChart();
->>>>>>> @{-1}
 				setLocationRelativeTo(null);
 				
 			}
@@ -994,19 +972,11 @@ public class Care5w2h extends JFrame {
 		String inProgresStr = String.valueOf(inProgres);
 		showInProgress.setText(inProgresStr);
 
-<<<<<<< HEAD
 		int completed = dashB.getongoingActions();
 		String completedStr = String.valueOf(completed);
 		showCompleted.setText(completedStr);
 
 		int delayed = dashB.getongoingActions();
-=======
-		int completed = dashB.getCompleted();
-		String completedStr = String.valueOf(completed);
-		showCompleted.setText(completedStr);
-
-		int delayed = dashB.getDelayed();
->>>>>>> @{-1}
 		String delayedStr = String.valueOf(delayed);
 		showDelayed.setText(delayedStr);
 
